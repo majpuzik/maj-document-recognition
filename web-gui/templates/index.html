@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Matching - Terminal UI</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.4;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            border: 1px solid #333;
+            padding: 8px 12px;
+            margin-bottom: 10px;
+            background: #111;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #00ff00;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .header-stats {
+            color: #666;
+            font-size: 11px;
+        }
+
+        .header-stats span {
+            margin-left: 15px;
+        }
+
+        .stat-num {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            background: #111;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 6px 12px;
+            background: transparent;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            background: #1a1a1a;
+            color: #999;
+        }
+
+        .tab.active {
+            background: #0a0a0a;
+            color: #00ff00;
+            border-bottom: 2px solid #00ff00;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            padding: 6px;
+            border: 1px solid #333;
+            background: #111;
+        }
+
+        .filter-btn {
+            padding: 4px 10px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #666;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 10px;
+            transition: all 0.15s;
+        }
+
+        .filter-btn:hover {
+            color: #999;
+            border-color: #444;
+        }
+
+        .filter-btn.active {
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        /* Chain List - Compact */
+        .chain-list {
+            border: 1px solid #333;
+            background: #111;
+        }
+
+        .chain-item {
+            display: grid;
+            grid-template-columns: 50px 60px 200px 1fr 100px 100px 80px;
+            gap: 10px;
+            padding: 6px 10px;
+            border-bottom: 1px solid #222;
+            align-items: center;
+            transition: background 0.15s;
+        }
+
+        .chain-item:hover {
+            background: #1a1a1a;
+        }
+
+        .chain-item:last-child {
+            border-bottom: none;
+        }
+
+        .chain-id {
+            color: #00aaff;
+            font-size: 11px;
+        }
+
+        .chain-status {
+            padding: 2px 6px;
+            font-size: 9px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .status-completed { background: #00ff00; color: #000; }
+        .status-delivered { background: #00aaff; color: #000; }
+        .status-invoiced { background: #ffaa00; color: #000; }
+
+        .chain-vendor {
+            color: #fff;
+            font-size: 11px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .chain-docs {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .doc-num {
+            color: #00aaff;
+        }
+
+        .chain-amount {
+            color: #00ff00;
+            font-size: 11px;
+            text-align: right;
+        }
+
+        .chain-conf {
+            color: #666;
+            font-size: 10px;
+            text-align: right;
+        }
+
+        .chain-date {
+            color: #666;
+            font-size: 10px;
+            text-align: right;
+        }
+
+        /* Table - Compact */
+        .table-container {
+            border: 1px solid #333;
+            background: #111;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 6px 10px;
+            text-align: left;
+            color: #00ff00;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: normal;
+            border-bottom: 1px solid #333;
+            background: #0a0a0a;
+        }
+
+        td {
+            padding: 5px 10px;
+            color: #e0e0e0;
+            font-size: 11px;
+            border-bottom: 1px solid #222;
+        }
+
+        tbody tr:hover {
+            background: #1a1a1a;
+        }
+
+        .doc-id {
+            color: #00aaff;
+            width: 60px;
+        }
+
+        .doc-type {
+            padding: 2px 6px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            font-size: 9px;
+            color: #888;
+            white-space: nowrap;
+        }
+
+        .doc-date {
+            color: #666;
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 11px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #333;
+            border-top-color: #00ff00;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Info footer */
+        .info {
+            margin-top: 10px;
+            padding: 6px 10px;
+            border: 1px solid #333;
+            background: #111;
+            color: #666;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .info-value {
+            color: #00ff00;
+        }
+
+        /* Hide/Show */
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body>
+    <div x-data="app()" x-init="init()" class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>DOCUMENT MATCHING SYSTEM v1.0</h1>
+            <div class="header-stats" x-show="stats">
+                <span>Docs: <span class="stat-num" x-text="stats?.total_documents || 0"></span></span>
+                <span>Chains: <span class="stat-num" x-text="stats?.total_chains || 0"></span></span>
+                <span>Matched: <span class="stat-num" x-text="stats?.documents_in_chains || 0"></span></span>
+                <span>Unmatched: <span class="stat-num" x-text="stats?.unmatched_documents || 0"></span></span>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button @click="activeTab = 'matched'; loadChains()"
+                    :class="activeTab === 'matched' ? 'active' : ''"
+                    class="tab">
+                [1] MATCHED (<span x-show="stats" x-text="stats?.total_chains || 0"></span>)
+            </button>
+            <button @click="activeTab = 'unmatched'; loadUnmatched()"
+                    :class="activeTab === 'unmatched' ? 'active' : ''"
+                    class="tab">
+                [2] UNMATCHED (<span x-show="stats" x-text="stats?.unmatched_documents || 0"></span>)
+            </button>
+        </div>
+
+        <!-- Matched Documents Tab -->
+        <div x-show="activeTab === 'matched'" x-cloak>
+            <!-- Loading -->
+            <div x-show="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading...</p>
+            </div>
+
+            <!-- Content -->
+            <div x-show="!loading && chains">
+                <!-- Status Filter -->
+                <div class="filters">
+                    <button @click="statusFilter = 'all'"
+                            :class="statusFilter === 'all' ? 'active' : ''"
+                            class="filter-btn">
+                        ALL (<span x-text="chains?.length || 0"></span>)
+                    </button>
+                    <button @click="statusFilter = 'completed'"
+                            :class="statusFilter === 'completed' ? 'active' : ''"
+                            class="filter-btn">
+                        ✓ COMPLETED (<span x-text="byStatus.completed?.length || 0"></span>)
+                    </button>
+                    <button @click="statusFilter = 'delivered'"
+                            :class="statusFilter === 'delivered' ? 'active' : ''"
+                            class="filter-btn">
+                        📦 DELIVERED (<span x-text="byStatus.delivered?.length || 0"></span>)
+                    </button>
+                    <button @click="statusFilter = 'invoiced'"
+                            :class="statusFilter === 'invoiced' ? 'active' : ''"
+                            class="filter-btn">
+                        📄 INVOICED (<span x-text="byStatus.invoiced?.length || 0"></span>)
+                    </button>
+                </div>
+
+                <!-- Chains List - Compact Grid -->
+                <div class="chain-list">
+                    <template x-for="chain in filteredChains()" :key="chain.chain_id">
+                        <div class="chain-item">
+                            <div class="chain-id" x-text="'#' + chain.id"></div>
+
+                            <div class="chain-status"
+                                 :class="{
+                                     'status-completed': chain.status === 'completed',
+                                     'status-delivered': chain.status === 'delivered',
+                                     'status-invoiced': chain.status === 'invoiced'
+                                 }"
+                                 x-text="chain.status.substring(0, 3).toUpperCase()"></div>
+
+                            <div class="chain-vendor" x-text="chain.vendor_name || 'N/A'"></div>
+
+                            <div class="chain-docs">
+                                <span x-show="chain.order_doc_id">O:<span class="doc-num" x-text="chain.order_doc_id"></span></span>
+                                <span x-show="chain.invoice_doc_id" style="margin-left: 8px;">I:<span class="doc-num" x-text="chain.invoice_doc_id"></span></span>
+                                <span x-show="chain.delivery_note_doc_id" style="margin-left: 8px;">D:<span class="doc-num" x-text="chain.delivery_note_doc_id"></span></span>
+                                <span x-show="chain.payment_doc_id" style="margin-left: 8px;">P:<span class="doc-num" x-text="chain.payment_doc_id"></span></span>
+                            </div>
+
+                            <div class="chain-amount" x-show="chain.total_amount">
+                                <span x-text="chain.total_amount"></span> CZK
+                            </div>
+
+                            <div class="chain-date" x-text="formatDateTime(chain.created_at)"></div>
+
+                            <div class="chain-conf" x-show="chain.confidence">
+                                <span x-text="Math.round(chain.confidence * 100)"></span>%
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unmatched Documents Tab -->
+        <div x-show="activeTab === 'unmatched'" x-cloak>
+            <!-- Loading -->
+            <div x-show="loadingUnmatched" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading...</p>
+            </div>
+
+            <!-- Content -->
+            <div x-show="!loadingUnmatched && unmatched">
+                <!-- Document Type Filter -->
+                <div class="filters">
+                    <button @click="typeFilter = 'all'"
+                            :class="typeFilter === 'all' ? 'active' : ''"
+                            class="filter-btn">
+                        ALL (<span x-text="unmatched?.length || 0"></span>)
+                    </button>
+                    <template x-for="type in uniqueDocTypes()" :key="type">
+                        <button @click="typeFilter = type"
+                                :class="typeFilter === type ? 'active' : ''"
+                                class="filter-btn">
+                            <span x-text="type.toUpperCase()"></span>
+                            (<span x-text="countByType(type)"></span>)
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Documents Table - Compact -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>FILENAME</th>
+                                <th>TYPE</th>
+                                <th>DATE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="doc in filteredUnmatched()" :key="doc.id">
+                                <tr>
+                                    <td class="doc-id" x-text="'#' + doc.id"></td>
+                                    <td>
+                                        <div style="max-width: 800px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                                             x-text="doc.file_name"
+                                             :title="doc.file_name"></div>
+                                    </td>
+                                    <td>
+                                        <span class="doc-type" x-text="doc.document_type"></span>
+                                    </td>
+                                    <td class="doc-date" x-text="formatDate(doc.classification_date)"></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="info">
+                    Showing: <span class="info-value" x-text="filteredUnmatched().length"></span> / <span x-text="unmatched?.length || 0"></span> documents
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function app() {
+            return {
+                activeTab: 'matched',
+                statusFilter: 'all',
+                typeFilter: 'all',
+                loading: true,
+                loadingUnmatched: false,
+                stats: null,
+                chains: null,
+                byStatus: {},
+                unmatched: null,
+
+                async init() {
+                    await this.loadStats();
+                    await this.loadChains();
+                },
+
+                async loadStats() {
+                    try {
+                        const response = await fetch('/api/stats');
+                        const data = await response.json();
+                        if (data.success) {
+                            this.stats = data.stats;
+                        }
+                    } catch (error) {
+                        console.error('Error loading stats:', error);
+                    }
+                },
+
+                async loadChains() {
+                    if (this.chains) return;
+                    this.loading = true;
+                    try {
+                        const response = await fetch('/api/chains');
+                        const data = await response.json();
+                        if (data.success) {
+                            this.chains = data.chains;
+                            this.byStatus = data.by_status;
+                        }
+                    } catch (error) {
+                        console.error('Error loading chains:', error);
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                async loadUnmatched() {
+                    if (this.unmatched) return;
+
+                    this.loadingUnmatched = true;
+                    try {
+                        const response = await fetch('/api/unmatched');
+                        const data = await response.json();
+                        if (data.success) {
+                            this.unmatched = data.unmatched;
+                        }
+                    } catch (error) {
+                        console.error('Error loading unmatched:', error);
+                    } finally {
+                        this.loadingUnmatched = false;
+                    }
+                },
+
+                filteredChains() {
+                    if (!this.chains) return [];
+                    if (this.statusFilter === 'all') return this.chains;
+                    return this.chains.filter(c => c.status === this.statusFilter);
+                },
+
+                filteredUnmatched() {
+                    if (!this.unmatched) return [];
+                    if (this.typeFilter === 'all') return this.unmatched;
+                    return this.unmatched.filter(d => d.document_type === this.typeFilter);
+                },
+
+                uniqueDocTypes() {
+                    if (!this.unmatched) return [];
+                    return [...new Set(this.unmatched.map(d => d.document_type))].sort();
+                },
+
+                countByType(type) {
+                    if (!this.unmatched) return 0;
+                    return this.unmatched.filter(d => d.document_type === type).length;
+                },
+
+                formatDate(dateStr) {
+                    if (!dateStr) return 'N/A';
+                    return new Date(dateStr).toLocaleDateString('cs-CZ');
+                },
+
+                formatDateTime(dateStr) {
+                    if (!dateStr) return '';
+                    const date = new Date(dateStr);
+                    const d = date.toLocaleDateString('cs-CZ', {day: '2-digit', month: '2-digit'});
+                    const t = date.toLocaleTimeString('cs-CZ', {hour: '2-digit', minute: '2-digit'});
+                    return `${d} ${t}`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

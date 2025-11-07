@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Config files with secrets
+config/paperless_config.json
+config/local_config.yaml
+.env
+
+# Data directories
+data/
+uploads/
+temp/
+cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pickle files
+*.pkl
+*.pickle
+
+# OCR temp files
+*.tiff
+*.tif
+temp_ocr/

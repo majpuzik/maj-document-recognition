@@ -1,0 +1,30 @@
+{
+  "paperless": {
+    "url": "http://localhost:8000",
+    "api_token": "your-api-token-here",
+    "verify_ssl": true,
+    "timeout": 30,
+    "auto_create_tags": true,
+    "auto_create_correspondents": true,
+    "auto_create_document_types": true,
+    "check_duplicates": true,
+    "duplicate_check_method": "checksum"
+  },
+  "document_type_mapping": {
+    "faktura": "Invoice",
+    "stvrzenka": "Receipt",
+    "bankovni_vypis": "Bank Statement",
+    "vyzva_k_platbe": "Payment Request",
+    "oznameni_o_zaplaceni": "Payment Confirmation",
+    "oznameni_o_nezaplaceni": "Non-Payment Notice",
+    "soudni_dokument": "Legal Document",
+    "obchodni_korespondence": "Business Correspondence"
+  },
+  "tag_mapping": {
+    "ai_classified": "AI-Classified",
+    "ocr_processed": "OCR-Processed",
+    "thunderbird_import": "Thunderbird-Import",
+    "high_confidence": "High-Confidence",
+    "needs_review": "Needs-Review"
+  }
+}

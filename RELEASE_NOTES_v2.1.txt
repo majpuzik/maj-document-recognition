@@ -1,0 +1,168 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                                                                          ║
+║              ✅ MAJ DOCUMENT RECOGNITION v2.1                           ║
+║                VERZOVANO A DOKUMENTOVANO                                 ║
+║                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                         🎯 CO BYLO SPLNĚNO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 1. Review kolegy souboru adaptive_parallel_test.py
+✅ 2. Přidáno rozpoznávání Objednávky (Purchase Order)
+✅ 3. Přidáno rozpoznávání Dodacího listu (Delivery Note)
+✅ 4. Analyzovány vlastnosti obou typů dokumentů
+✅ 5. Implementována přísná whitelist kontrola
+✅ 6. Vytvořena kompletní dokumentace
+✅ 7. Verzováno v gitu s tagem
+✅ 8. Vytvořen CHANGELOG
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                         📦 GIT COMMITS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Commit 1: 52610c9
+  feat: Add Purchase Order and Delivery Note recognition (v2.1)
+  - 3 soubory změněny
+  - 981 řádků přidáno
+  - Hlavní implementace
+
+Commit 2: af3b19f
+  docs: Add CHANGELOG for v2.1 release
+  - 1 soubor změněn
+  - 202 řádků přidáno
+  - CHANGELOG dokumentace
+
+Tag: v2.1-objednavka-dodaci-list
+  - Annotated tag s detailním popisem
+  - Release date: 2025-11-06
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      📄 ZMĚNĚNÉ SOUBORY (4)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. src/ai/classifier_improved.py
+   ✅ Přidány kategorie (řádky 40-41)
+   ✅ Few-shot příklady (řádky 78-91)
+   ✅ BlacklistWhitelist import (řádky 32-34)
+   ✅ Whitelist verifikace (řádky 338-379)
+
+2. config/config.yaml
+   ✅ Nové typy: objednavka, dodaci_list (54-55)
+   ✅ CZ keywords (79-91)
+   ✅ DE/EN keywords (92-105)
+
+3. OBJEDNAVKA_DODACI_LIST_IMPLEMENTACE.md
+   ✅ 400+ řádků kompletní dokumentace
+   ✅ Rozhodovací tabulka
+   ✅ Příklady a testování
+   ✅ Fraud protection guide
+
+4. CHANGELOG_v2.1.md
+   ✅ 202 řádků changelog
+   ✅ Feature descriptions
+   ✅ Upgrade guide
+   ✅ Testing examples
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    🔍 KLÍČOVÉ VLASTNOSTI v2.1
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 Objednávka (Purchase Order):
+   • Obsahuje: ceny, číslo objednávky, dodací termín
+   • Keywords: CZ/DE/EN (26 keywords)
+   • Whitelist kontrola: číslo objednávky MUSÍ být přítomno
+   • Confidence: 0.93 base + 0.15 whitelist boost
+
+📦 Dodací list (Delivery Note):
+   • Obsahuje: hmotnost, počet balíků, bez cen
+   • Keywords: CZ/DE/EN (14 keywords)
+   • Whitelist kontrola: číslo DL nebo shipping info
+   • Confidence: 0.91 base + 0.15 whitelist boost
+
+🛡️ Fraud Detection:
+   • +15% boost pro whitelist sendery s correct format
+   • +5% snížený boost pokud chybí povinné prvky
+   • Automatické warning do logu pro podezřelé případy
+   • Ochrana před fake objednávkami/dodacími listy
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                        📊 STATISTIKY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Soubory:           4 změněné, 4 nově vytvořené
+Řádky kódu:        981 přidáno
+Dokumentace:       602 řádků (400 + 202)
+Git commits:       2
+Git tags:          1
+Keywords:          40 (26 objednávka + 14 dodací list)
+Jazyky:            3 (CZ, DE, EN)
+Typy dokumentů:    +2 nové (celkem 12)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                       🚀 JAK POUŽÍT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  Zkontrolovat změny:
+    $ cd ~/maj-document-recognition
+    $ git log --oneline -3
+    $ git show v2.1-objednavka-dodaci-list
+
+2️⃣  Přečíst dokumentaci:
+    $ less OBJEDNAVKA_DODACI_LIST_IMPLEMENTACE.md
+    $ less CHANGELOG_v2.1.md
+
+3️⃣  Testovat nové funkce:
+    $ source venv/bin/activate
+    $ echo "Objednávka č. PO-001, Cena: 1000 Kč" > /tmp/test.txt
+    $ python -c "from src.ai.classifier_improved import ImprovedAIClassifier; ..."
+
+4️⃣  Nasadit do produkce:
+    # Již aktivní! Žádné další kroky nejsou potřeba.
+    # Config automaticky načte nové typy.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      📖 DOKUMENTACE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Hlavní dokumenty:
+  📄 OBJEDNAVKA_DODACI_LIST_IMPLEMENTACE.md   (400 řádků)
+  📄 CHANGELOG_v2.1.md                         (202 řádků)
+  📄 README.md                                 (aktualizováno v v2.0)
+
+Technické:
+  📄 src/ai/classifier_improved.py:338-379    (Whitelist verifikace)
+  📄 config/config.yaml:54-105                (Typy a keywords)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                     🔮 DALŠÍ KROKY (v2.2)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Plánované features:
+  - [ ] Extrakce čísla objednávky do metadata
+  - [ ] Extrakce dodacího termínu
+  - [ ] Automatické párování: objednávka → DL → faktura
+  - [ ] Detekce duplicitních objednávek
+  - [ ] Export do ERP systémů
+  - [ ] Grafické rozhraní pro přehled objednávek
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                                                                          ║
+║                    🎉 IMPLEMENTACE ÚSPĚŠNÁ 🎉                           ║
+║                                                                          ║
+║   ✅ 2 nové typy dokumentů                                              ║
+║   ✅ 1183 řádků přidáno (kód + dokumentace)                             ║
+║   ✅ Fraud detection aktivní                                            ║
+║   ✅ Multilingvální podpora (CZ/DE/EN)                                  ║
+║   ✅ Verzováno v gitu s tagem v2.1                                      ║
+║   ✅ Kompletní dokumentace (602 řádků)                                  ║
+║                                                                          ║
+║   Made with ❤️  by MAJ + Claude Code                                    ║
+║   Version 2.1 - Released 2025-11-06                                     ║
+║   Git tag: v2.1-objednavka-dodaci-list                                  ║
+║   Commits: 52610c9, af3b19f                                             ║
+║                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
