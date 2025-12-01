@@ -1,0 +1,429 @@
+{
+  "total_scanned": 100,
+  "documents_found": 4,
+  "by_type": {
+    "receipt": {
+      "total": 4,
+      "consensus": 2,
+      "matches": 0
+    }
+  },
+  "results": [
+    {
+      "email_id": 3034,
+      "found": false
+    },
+    {
+      "email_id": 31,
+      "found": false
+    },
+    {
+      "email_id": 1674,
+      "found": false
+    },
+    {
+      "email_id": 3035,
+      "found": false
+    },
+    {
+      "email_id": 32,
+      "found": false
+    },
+    {
+      "email_id": 1675,
+      "found": false
+    },
+    {
+      "email_id": 1676,
+      "found": false
+    },
+    {
+      "email_id": 1677,
+      "found": false
+    },
+    {
+      "email_id": 1678,
+      "found": false
+    },
+    {
+      "email_id": 1679,
+      "found": false
+    },
+    {
+      "email_id": 1680,
+      "found": false
+    },
+    {
+      "email_id": 1683,
+      "found": false
+    },
+    {
+      "email_id": 1682,
+      "found": false
+    },
+    {
+      "email_id": 1681,
+      "found": false
+    },
+    {
+      "email_id": 1685,
+      "found": false
+    },
+    {
+      "email_id": 1684,
+      "found": false
+    },
+    {
+      "email_id": 1690,
+      "found": false
+    },
+    {
+      "email_id": 1691,
+      "found": false
+    },
+    {
+      "email_id": 1692,
+      "found": false
+    },
+    {
+      "email_id": 1693,
+      "found": false
+    },
+    {
+      "email_id": 1697,
+      "found": false
+    },
+    {
+      "email_id": 1696,
+      "found": false
+    },
+    {
+      "email_id": 1695,
+      "found": false
+    },
+    {
+      "email_id": 1694,
+      "found": false
+    },
+    {
+      "email_id": 1698,
+      "found": false
+    },
+    {
+      "email_id": 1700,
+      "found": false
+    },
+    {
+      "email_id": 1699,
+      "found": false
+    },
+    {
+      "email_id": 1701,
+      "found": false
+    },
+    {
+      "email_id": 1702,
+      "found": false
+    },
+    {
+      "email_id": 1704,
+      "found": false
+    },
+    {
+      "email_id": 1703,
+      "found": false
+    },
+    {
+      "email_id": 1705,
+      "found": false
+    },
+    {
+      "email_id": 1707,
+      "found": false
+    },
+    {
+      "email_id": 1706,
+      "found": false
+    },
+    {
+      "email_id": 1709,
+      "found": false
+    },
+    {
+      "email_id": 1708,
+      "found": false
+    },
+    {
+      "email_id": 1710,
+      "found": false
+    },
+    {
+      "email_id": 1711,
+      "found": false
+    },
+    {
+      "email_id": 1712,
+      "found": false
+    },
+    {
+      "email_id": 1713,
+      "found": false
+    },
+    {
+      "email_id": 1714,
+      "found": false
+    },
+    {
+      "email_id": 1716,
+      "found": false
+    },
+    {
+      "email_id": 1715,
+      "found": false
+    },
+    {
+      "email_id": 1717,
+      "found": false
+    },
+    {
+      "email_id": 1718,
+      "found": false
+    },
+    {
+      "email_id": 1719,
+      "found": true,
+      "doc_type": "receipt",
+      "has_consensus": true,
+      "match": false,
+      "local_items": 1,
+      "ai_items": 0,
+      "consensus_strength": 1.0
+    },
+    {
+      "email_id": 1720,
+      "found": false
+    },
+    {
+      "email_id": 1721,
+      "found": false
+    },
+    {
+      "email_id": 1722,
+      "found": false
+    },
+    {
+      "email_id": 1723,
+      "found": false
+    },
+    {
+      "email_id": 1724,
+      "found": false
+    },
+    {
+      "email_id": 1728,
+      "found": false
+    },
+    {
+      "email_id": 1727,
+      "found": false
+    },
+    {
+      "email_id": 1726,
+      "found": false
+    },
+    {
+      "email_id": 1725,
+      "found": false
+    },
+    {
+      "email_id": 1729,
+      "found": true,
+      "doc_type": "receipt",
+      "has_consensus": true,
+      "match": false,
+      "local_items": 1,
+      "ai_items": 0,
+      "consensus_strength": 1.0
+    },
+    {
+      "email_id": 1730,
+      "found": false
+    },
+    {
+      "email_id": 1731,
+      "found": false
+    },
+    {
+      "email_id": 1733,
+      "found": false
+    },
+    {
+      "email_id": 1732,
+      "found": false
+    },
+    {
+      "email_id": 1734,
+      "found": false
+    },
+    {
+      "email_id": 1735,
+      "found": false
+    },
+    {
+      "email_id": 1736,
+      "found": false
+    },
+    {
+      "email_id": 1737,
+      "found": false
+    },
+    {
+      "email_id": 1738,
+      "found": true,
+      "doc_type": "receipt",
+      "has_consensus": false
+    },
+    {
+      "email_id": 1739,
+      "found": false
+    },
+    {
+      "email_id": 1741,
+      "found": false
+    },
+    {
+      "email_id": 1742,
+      "found": false
+    },
+    {
+      "email_id": 1740,
+      "found": false
+    },
+    {
+      "email_id": 1743,
+      "found": false
+    },
+    {
+      "email_id": 1744,
+      "found": false
+    },
+    {
+      "email_id": 1745,
+      "found": true,
+      "doc_type": "receipt",
+      "has_consensus": false
+    },
+    {
+      "email_id": 1746,
+      "found": false
+    },
+    {
+      "email_id": 1747,
+      "found": false
+    },
+    {
+      "email_id": 1748,
+      "found": false
+    },
+    {
+      "email_id": 1749,
+      "found": false
+    },
+    {
+      "email_id": 1750,
+      "found": false
+    },
+    {
+      "email_id": 1751,
+      "found": false
+    },
+    {
+      "email_id": 1752,
+      "found": false
+    },
+    {
+      "email_id": 1753,
+      "found": false
+    },
+    {
+      "email_id": 1754,
+      "found": false
+    },
+    {
+      "email_id": 1755,
+      "found": false
+    },
+    {
+      "email_id": 1758,
+      "found": false
+    },
+    {
+      "email_id": 1756,
+      "found": false
+    },
+    {
+      "email_id": 1759,
+      "found": false
+    },
+    {
+      "email_id": 1757,
+      "found": false
+    },
+    {
+      "email_id": 1762,
+      "found": false
+    },
+    {
+      "email_id": 1761,
+      "found": false
+    },
+    {
+      "email_id": 1763,
+      "found": false
+    },
+    {
+      "email_id": 1760,
+      "found": false
+    },
+    {
+      "email_id": 1764,
+      "found": false
+    },
+    {
+      "email_id": 1766,
+      "found": false
+    },
+    {
+      "email_id": 1765,
+      "found": false
+    },
+    {
+      "email_id": 1767,
+      "found": false
+    },
+    {
+      "email_id": 1768,
+      "found": false
+    },
+    {
+      "email_id": 1769,
+      "found": false
+    },
+    {
+      "email_id": 1770,
+      "found": false
+    },
+    {
+      "email_id": 1771,
+      "found": false
+    },
+    {
+      "email_id": 1772,
+      "found": false
+    },
+    {
+      "email_id": 1773,
+      "found": false
+    }
+  ]
+}

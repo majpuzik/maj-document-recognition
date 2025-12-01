@@ -1,0 +1,514 @@
+{
+  "total_tested": 52,
+  "documents_found": 47,
+  "consensus_reached": 0,
+  "matches": 0,
+  "overall_accuracy": 0,
+  "by_type": {
+    "parkovací_lístek": {
+      "total": 22,
+      "consensus": 0,
+      "matches": 0,
+      "avg_classifier_conf": 103.18181818181819,
+      "avg_extraction_conf": 0.0,
+      "files": [
+        "Accepted_ Poslat účetnictví MBWs pan Brzak @ Mon F-202406251815-Martin Pužík.pdf",
+        "MBW - Doklad pro pana Brzaka - platba Energie u by-202501221107-Martin Pužík.pdf",
+        "MBW - Motorka _ Potvrzení přijetí platby k povinné-202406281634-Martin Pužík.pdf",
+        "MBW - další nejasné platby-202406281637-Martin Pužík.pdf",
+        "MBW - nejasné položky (zoufalý konec)-202406281642-Martin Pužík.pdf",
+        "MBW - neznámá platba 11 500 Kč _ VISA-202406281648-Martin Pužík.pdf",
+        "Re_Fw_ plná moc MBW s razitkem-202406271730-Pavel Brzák.pdf",
+        "Re_MBW auto-202406281004-Pavel Brzák.pdf",
+        "Re_MBW pohyby na účtu 2023-202406261359-Pavel Brzák.pdf",
+        "Re_MBW pohyby na účtu 2023-202406261403-Pavel Brzák.pdf",
+        "Re_MBW pohyby na účtu 2023-202406261409-Pavel Brzák.pdf",
+        "Re_Podklady MBW faktury dosle-202406261336-Pavel Brzák.pdf",
+        "Re_Podklady MBW faktury dosle-202406261340-Pavel Brzák.pdf",
+        "Re_Ucetnictvi MBWs za 2023 - vydane faktury-202406260652-Pavel Brzák.pdf",
+        "Re_Ucetnictvi MBWs za 2023-202406251508-Pavel Brzák.pdf",
+        "Re_Ucetnictvi MBWs za 2023-202406251537-Pavel Brzák.pdf",
+        "Re_Ucetnictvi MBWs-202502260854-Pavel Brzák.pdf",
+        "Re_Ucetnictvi MBWs-202502280924-Pavel Brzák.pdf",
+        "Re_Ucetnictvi MBWs-202502281021-Pavel Brzák.pdf",
+        "Re_daně MBW-202406281055-Pavel Brzák.pdf",
+        "Re_daně MBW-202406281131-Pavel Brzák.pdf",
+        "daně MBW-202406281018-Pavel Brzák.pdf"
+      ],
+      "accuracy": 0
+    },
+    "faktura": {
+      "total": 21,
+      "consensus": 0,
+      "matches": 0,
+      "avg_classifier_conf": 112.0952380952381,
+      "avg_extraction_conf": 0.0,
+      "files": [
+        "FW_ PO January - Fakturace MBW-202502121413-_Martin Puzik_.pdf",
+        "Faktura pro MBW 11_2023 - prodej hardware Nvidia R-202406281526-Martin Pužík.pdf",
+        "MBW  Faktura za STK naklady 8000 Kc-202504091306-Martin Puzik.pdf",
+        "MBW  Faktura za sluzby LEONARDO.AI pro rok 2024-202504101640-Martin Puzik.pdf",
+        "MBW - Faktura za pronájem Havas 01-03_2024 (1 mesi-202404151047-_Martin Puzik_.pdf",
+        "MBW - faktury za prodej hardware v 2023-202406281631-Martin Pužík.pdf",
+        "MBW • Faktura za STK náklady 8000 Kč-202504091306-Martin Pužík.pdf",
+        "MBW • Faktura za STK náklady 8000 Kč-202504091306-Martin Pužík_1.pdf",
+        "MBW • Faktura za STK náklady 8000 Kč-202504091306-Martin Pužík_2.pdf",
+        "MBW • Faktura za služby LEONARDO.AI pro rok 2024-202504101640-Martin Pužík.pdf",
+        "MBW • Faktura za služby LEONARDO.AI pro rok 2024-202504101640-Martin Pužík_1.pdf",
+        "MBW • Faktura za služby LEONARDO.AI pro rok 2024-202504101640-Martin Pužík_2.pdf",
+        "MBW • kam kolik (Aleš) z peněz SOFTdent (uhrazené -202504022229-Martin Pužík.pdf",
+        "Re_MBW  kam kolik (Ales) z penez SOFTdent (uhraze-202504091250-Martin Puzik.pdf",
+        "Re_MBW  kam kolik (Ales) z penez SOFTdent (uhraze-202504091304-Martin Puzik.pdf",
+        "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091250-Martin Pužík.pdf",
+        "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091250-Martin Pužík_1.pdf",
+        "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091250-Martin Pužík_2.pdf",
+        "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091304-Martin Pužík.pdf",
+        "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091304-Martin Pužík_1.pdf",
+        "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091304-Martin Pužík_2.pdf"
+      ],
+      "accuracy": 0
+    },
+    "smlouva": {
+      "total": 1,
+      "consensus": 0,
+      "matches": 0,
+      "avg_classifier_conf": 90.0,
+      "avg_extraction_conf": 0.0,
+      "files": [
+        "MBW - Allianz pojištovna pro GLK - smlouva k jasné-202406281657-Martin Pužík.pdf"
+      ],
+      "accuracy": 0
+    },
+    "účtenka_čerpací_stanice": {
+      "total": 2,
+      "consensus": 0,
+      "matches": 0,
+      "avg_classifier_conf": 90.0,
+      "avg_extraction_conf": 0.0,
+      "files": [
+        "MBW účtenky uploadnuté-202501122130-Martin Pužík.pdf",
+        "Re_MBW účtenky uploadnuté-202501122240-Martin Pužík.pdf"
+      ],
+      "accuracy": 0
+    },
+    "autoservis": {
+      "total": 1,
+      "consensus": 0,
+      "matches": 0,
+      "avg_classifier_conf": 115.0,
+      "avg_extraction_conf": 0.0,
+      "files": [
+        "Nedoručitelná_ Re_ Ucetnictvi MBWs za 2023-202406251540-_Microsoft Outlook_.pdf"
+      ],
+      "accuracy": 0
+    }
+  },
+  "results": [
+    {
+      "file": "Accepted_ Poslat účetnictví MBWs pan Brzak @ Mon F-202406251815-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Buchhaltung MBW účetnictví-202406251633-Martin Pužík.pdf",
+      "found": false,
+      "reason": "unknown_type",
+      "text_length": 491
+    },
+    {
+      "file": "FW_ FAKTURACE MBW_HAVAS - PO 2-2025-202503051140-_Martin Puzik_.pdf",
+      "found": false,
+      "reason": "unknown_type",
+      "text_length": 3418
+    },
+    {
+      "file": "FW_ PO January - Fakturace MBW-202502121413-_Martin Puzik_.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 50,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Faktura pro MBW 11_2023 - prodej hardware Nvidia R-202406281526-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW  Faktura za STK naklady 8000 Kc-202504091306-Martin Puzik.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW  Faktura za sluzby LEONARDO.AI pro rok 2024-202504101640-Martin Puzik.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW - Allianz pojištovna pro GLK - smlouva k jasné-202406281657-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "smlouva",
+      "classifier_confidence": 90,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "MBW - Doklad pro pana Brzaka - platba Energie u by-202501221107-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "MBW - Faktura za pronájem Havas 01-03_2024 (1 mesi-202404151047-_Martin Puzik_.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 100,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW - Motorka _ Potvrzení přijetí platby k povinné-202406281634-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "MBW - další nejasné platby-202406281637-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 85,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "MBW - faktury za prodej hardware v 2023-202406281631-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW - nejasné položky (zoufalý konec)-202406281642-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 85,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "MBW - neznámá platba 11 500 Kč _ VISA-202406281648-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 85,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "MBW - prosím o provedení jedné platby obratem - uk-202407251352-Martin Pužík.pdf",
+      "found": false,
+      "reason": "unknown_type",
+      "text_length": 954
+    },
+    {
+      "file": "MBW účtenky uploadnuté-202501122130-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "účtenka_čerpací_stanice",
+      "classifier_confidence": 90,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • Faktura za STK náklady 8000 Kč-202504091306-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • Faktura za STK náklady 8000 Kč-202504091306-Martin Pužík_1.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • Faktura za STK náklady 8000 Kč-202504091306-Martin Pužík_2.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • Faktura za služby LEONARDO.AI pro rok 2024-202504101640-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • Faktura za služby LEONARDO.AI pro rok 2024-202504101640-Martin Pužík_1.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • Faktura za služby LEONARDO.AI pro rok 2024-202504101640-Martin Pužík_2.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBW • kam kolik (Aleš) z peněz SOFTdent (uhrazené -202504022229-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "MBWs plna moc Brzak.pdf",
+      "found": false,
+      "reason": "no_text"
+    },
+    {
+      "file": "Nedoručitelná_ Re_ Ucetnictvi MBWs za 2023-202406251540-_Microsoft Outlook_.pdf",
+      "found": true,
+      "doc_type": "autoservis",
+      "classifier_confidence": 115,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_Fw_ plná moc MBW s razitkem-202406271730-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_MBW  kam kolik (Ales) z penez SOFTdent (uhraze-202504091250-Martin Puzik.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW  kam kolik (Ales) z penez SOFTdent (uhraze-202504091304-Martin Puzik.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW auto-202406281004-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_MBW pohyby na účtu 2023-202406261359-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 85,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_MBW pohyby na účtu 2023-202406261403-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_MBW pohyby na účtu 2023-202406261409-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_MBW účtenky uploadnuté-202501122240-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "účtenka_čerpací_stanice",
+      "classifier_confidence": 90,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091250-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091250-Martin Pužík_1.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091250-Martin Pužík_2.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091304-Martin Pužík.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091304-Martin Pužík_1.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_MBW • kam kolik (Aleš) z peněz SOFTdent (uhraze-202504091304-Martin Pužík_2.pdf",
+      "found": true,
+      "doc_type": "faktura",
+      "classifier_confidence": 116,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "file": "Re_Podklady MBW faktury dosle-202406261336-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Podklady MBW faktury dosle-202406261340-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Ucetnictvi MBWs za 2023 - vydane faktury-202406260652-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Ucetnictvi MBWs za 2023-202406251508-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 85,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Ucetnictvi MBWs za 2023-202406251537-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 85,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Ucetnictvi MBWs-202502260854-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Ucetnictvi MBWs-202502280924-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Ucetnictvi MBWs-202502281021-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_Web mbws-202504151218-Martin Pužík.pdf",
+      "found": false,
+      "reason": "unknown_type",
+      "text_length": 786
+    },
+    {
+      "file": "Re_daně MBW-202406281055-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "Re_daně MBW-202406281131-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    },
+    {
+      "file": "daně MBW-202406281018-Pavel Brzák.pdf",
+      "found": true,
+      "doc_type": "parkovací_lístek",
+      "classifier_confidence": 110,
+      "reason": "no_extractor"
+    }
+  ]
+}

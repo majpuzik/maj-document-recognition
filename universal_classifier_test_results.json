@@ -1,0 +1,523 @@
+{
+  "total_scanned": 100,
+  "documents_found": 1,
+  "consensus_reached": 0,
+  "matches": 0,
+  "overall_accuracy": 0,
+  "by_type": {
+    "účtenka_čerpací_stanice": {
+      "total": 1,
+      "consensus": 0,
+      "matches": 0,
+      "avg_classifier_conf": 90.0,
+      "avg_extraction_conf": 0.0,
+      "accuracy": 0.0
+    }
+  },
+  "results": [
+    {
+      "email_id": 3034,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 31,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1674,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 3035,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 32,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1675,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1676,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1677,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1678,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1679,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1680,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1683,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1682,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1681,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1685,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1684,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1690,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1691,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1692,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1693,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1697,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1696,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1695,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1694,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1698,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1700,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1699,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1701,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1702,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1704,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1703,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1705,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1707,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1706,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1709,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1708,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1710,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1711,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1712,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1713,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1714,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1716,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1715,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1717,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1718,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1719,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1720,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1721,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1722,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1723,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1724,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1728,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1727,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1726,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1725,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1729,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1730,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1731,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1733,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1732,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1734,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1735,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1736,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1737,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1738,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1739,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1741,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1742,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1740,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1743,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1744,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1745,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1746,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1747,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1748,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1749,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1750,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1751,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1752,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1753,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1754,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1755,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1758,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1756,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1759,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1757,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1762,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1761,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1763,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1760,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1764,
+      "found": true,
+      "doc_type": "účtenka_čerpací_stanice",
+      "classifier_confidence": 90,
+      "extraction_items": 0,
+      "extraction_confidence": 0.0,
+      "reason": "no_items"
+    },
+    {
+      "email_id": 1766,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1765,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1767,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1768,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1769,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1770,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1771,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1772,
+      "found": false,
+      "reason": "unknown_type"
+    },
+    {
+      "email_id": 1773,
+      "found": false,
+      "reason": "unknown_type"
+    }
+  ]
+}

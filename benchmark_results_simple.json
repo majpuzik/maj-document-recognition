@@ -1,0 +1,1029 @@
+{
+  "cz_receipt_intelligence": {
+    "error": "cannot import name 'extract_receipt_info' from 'cz_receipt_intelligence' (/Users/m.a.j.puzik/apps/maj-subscriptions-local/cz_receipt_intelligence.py)"
+  },
+  "document_processor": {
+    "error": "No module named 'sklearn'"
+  },
+  "ollama_classifier": {
+    "name": "Ollama AI Classifier",
+    "total": 50,
+    "processed": 50,
+    "errors": 50,
+    "time": 3.0994415283203125e-05,
+    "speed": 1613193.8461538462,
+    "classifications": [
+      {
+        "subject": "[Novinky o úloze] Surprising AI stories you missed",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "[Novinky o úloze] Surprising AI stories you missed",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 20.10.2025, Auktionserinnerung",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "We have unfinished business 👀",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "We have unfinished business 👀",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Panoramic Graphene Cargo Jacket & Flosser Y - Popu",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 17.10.2025, Ergebnisliste jetzt ",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Best Duplicate Files & Photos Remover Tool for Win",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "GitHub Org Rename to OpenHands on Mon Oct 20th @ 1",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "GitHub Org Rename to OpenHands on Mon Oct 20th @ 1",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Lowest prices of the year with FedEx Express + Gif",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 16.10.2025, Ergebnisliste jetzt ",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 16.10.2025, Ergebnisliste jetzt online",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 06.11.2025, Katalog jetzt online",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 17.10.2025, Auktionserinnerung",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Qwen3-VL ",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Unlock Any iPhone in Minutes - Bypass Passcode & A",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "The Kitchen Reimagined - Just Launched On Kickstar",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 16.10.2025, Auktionserinnerung",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 07.11.2025, Katalog jetzt online",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 23.10.2025, Katalog jetzt onlin",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 16.10.2025, Auktionserinnerung",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "From Germany Express FedEx Shipping. Autumn Sale. ",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Du hast APERTIA-AI v praxi erfolgreich abonniert ✨",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Du hast APERTIA-AI v praxi erfolgreich abonniert ✨",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Etsy Challenge Day 28 (12.10.25) - Relaxed Weekend",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Ascentiz - 1.4M+ Raised On Kickstarter",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Tradiční české výrobky",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 13.10.2025, Ergebnisliste jetzt ",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Voděodolná vyhřívaná vesta 🚀 Pouze dnes 459Kč",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Vyměňte RevPoints za data eSIM",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Sunday Grow Box - Popular On Kickstarter",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Nimbus Amp & GrilTi Titanium Grill - Popular On Ki",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 13.10.2025, Auktionserinnerung",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 10.10.2025, Ergebnisliste jetzt online",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Pro sběratele. Nádherné vánoční přání a knihy. 737",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Take This Quick 2-Minute Survey, Your Feedback = O",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "2 neue Immobilienangebote entdecken",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Synology-Konto - Sicherheitsmeldung",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "De optische kwaliteit verkrijgbaar in Lezen en Nah",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Saturday, 11 October 2025)",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      },
+      {
+        "subject": "De optische kwaliteit verkrijgbaar in Lezen en Nah",
+        "error": "'OllamaDocumentClassifier' object has no attribute 'classify_document'"
+      }
+    ],
+    "note": "Tested on first 50 emails only (AI slower)"
+  },
+  "legal_identifier": {
+    "name": "Legal Document Identifier",
+    "total": 200,
+    "processed": 200,
+    "errors": 200,
+    "time": 0.0002570152282714844,
+    "speed": 778164.0074211502,
+    "classifications": [
+      {
+        "subject": "[Novinky o úloze] Surprising AI stories you missed",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "[Novinky o úloze] Surprising AI stories you missed",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 20.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "We have unfinished business 👀",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "We have unfinished business 👀",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Panoramic Graphene Cargo Jacket & Flosser Y - Popu",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 17.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Best Duplicate Files & Photos Remover Tool for Win",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "GitHub Org Rename to OpenHands on Mon Oct 20th @ 1",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "GitHub Org Rename to OpenHands on Mon Oct 20th @ 1",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Lowest prices of the year with FedEx Express + Gif",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 16.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 16.10.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 06.11.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 17.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Qwen3-VL ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Unlock Any iPhone in Minutes - Bypass Passcode & A",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "The Kitchen Reimagined - Just Launched On Kickstar",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 16.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 07.11.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 23.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 16.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "From Germany Express FedEx Shipping. Autumn Sale. ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Du hast APERTIA-AI v praxi erfolgreich abonniert ✨",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Du hast APERTIA-AI v praxi erfolgreich abonniert ✨",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Etsy Challenge Day 28 (12.10.25) - Relaxed Weekend",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Ascentiz - 1.4M+ Raised On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Tradiční české výrobky",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 13.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Voděodolná vyhřívaná vesta 🚀 Pouze dnes 459Kč",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Vyměňte RevPoints za data eSIM",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Sunday Grow Box - Popular On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Nimbus Amp & GrilTi Titanium Grill - Popular On Ki",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 13.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 10.10.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Pro sběratele. Nádherné vánoční přání a knihy. 737",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Take This Quick 2-Minute Survey, Your Feedback = O",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "2 neue Immobilienangebote entdecken",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Synology-Konto - Sicherheitsmeldung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "De optische kwaliteit verkrijgbaar in Lezen en Nah",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Saturday, 11 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "De optische kwaliteit verkrijgbaar in Lezen en Nah",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Thinking Egg IV & The Color Cult - Just Launched O",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 30.10.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Jagd-, Sport-, & Sammlerwaffen, 06.11.2025, Katalo",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 03.11.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 29.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "30% sleva na VŠE končí tuto neděli",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Friday, 10 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Balíkovna za 49,-",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "K vašemu účtu Microsoft se připojily nové aplikace",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 09.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Thursday, 9 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Jednorázové virtuální karty pro bezpečnější platby",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 10.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Extra slevy na vše v našem obchodě 🎁",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Wednesday, 8 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 06.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 20.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 09.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Tuesday, 7 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Rare: A Calendar Watch Worth Collecting.",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "PODZIMNÍ VÝPRODEJ 🚨🍂 Vaše extra sleva 30 % na celý",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Monday, 6 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Snímek obrazovky 2025-10-05 v 15.08.35.pdf",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Daily Digest (Sunday, 5 October 2025)",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "The Best Disk Partition Manager for Windows 11/10/",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 06.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "6-in-1 EDC Flashlight with Laser - Just Launched O",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 03.10.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "October Update: Grafana Cloud Updates: Kubernetes ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "NOMADE 58 Hoodie & OnePlace - Popular On Kickstart",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Can't Open Your Videos or Photos? Repair Them Now!",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 02.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 02.10.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 16.10.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 17.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 30.09.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 01.10.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 03.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 28.10.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Washwow & Dymesty - Ending Soon On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 02.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 02.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Podzimní typy na čtení",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 01.10.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Automatická nástěnná lampa s pohybovým senzorem -5",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Nebula X1 Pro - 4.3M+ Raised On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Hey, your project’s still here",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 30.09.2025, Sofortkauferinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "EXO The Golf Golf Glove & Folomov A7 - Ending Soon",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Need to Clone Your Hard Drive? Try Our Free Disk C",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Exklusive Farbsteine 26.09.2025, Ergebnisliste jet",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 13.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Jagd-, Sport- und Sammlerwaffen 26.09.2025, Ergebn",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Cloudstep - Popular On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Erlesener Schmuck 25.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Commuter & ProWrapp - Popular On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Ollama's web search",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Make it Easy to Transfer Everything to Your New Wi",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "New device signed in to your Appy Pie account",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Diamonds Only 24.09.2025, Ergebnisliste jetzt onli",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Preziosen aus dem Nachlass Antje-Katrin Kühnemann,",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 25.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Unlock Any iPhone in Minutes - Bypass Passcode & A",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Exklusive Farbsteine 26.09.2025, Auktionserinnerun",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 16.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Jagd-, Sport- und Sammlerwaffen 26.09.2025, Auktio",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Unlock 50% OFF Your PDF Editing Tools Today!",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Stylepie Hepta Cables & The Pin - Popular On Kicks",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Batch Download Videos from 1000+ Sites Easily",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Gamer Alert: Resolve Battlefield Crashes by Switch",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Gamer Alert: Resolve Battlefield Crashes by Switch",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 09.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Erlesener Schmuck 25.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 25.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 23.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 02.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "MagKnives & NXPort - Popular On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Ollama's cloud models",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Welcome on board!🎉",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Unlock Any iPhone in Minutes - Bypass Passcode & A",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 10.10.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Diamonds Only 24.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Kneeflow - Popular On Indiegogo",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "PDF Editor 50% OFF - Create and Edit PDF Files Bas",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "PDF Editor 50% OFF - Create and Edit PDF Files Bas",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 23.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Analytická chytrá váha -49% ⚖️ Sleva pouze dnes - ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "MusicCam - Just Launched On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Atlantic Star by Aerotec - Just Launched On Kickst",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Clean Up Duplicate Files & Photos in Minutes – The",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Fall Sale Exclusive Deals + Free Gifts.",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 19.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "✍PDF Editor 50% OFF - Create, Merge, Compress, Edi",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Indoor Hydroponic Tower - 78K+ Raised On Kickstart",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 18.09.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 06.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 18.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Turn Any USB into Portable Windows! Clone Windows ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Screen Recorder - Record a Tutorial Video, Online ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Fall Sale You Can’t Miss + Free Gifts.",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Zdravím ze 2N",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 19.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 01.10.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Silver Towels & Cyberpunk Thunderbolt 5 - Just Lau",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Fall Sale Exclusive Deals + Free Gifts.",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 25.09.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 18.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 18.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Dymesty AI Glasses & DIY Astrology with AI - Just ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 15.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "3 In 1 Titanium EDC Cable & 2 others - Ending Soon",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 15.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "HAVIT Fuxi H8 & Zorik Light - Trending On Kickstar",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Want to Make Changes in a PDF File? Do It in Secon",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 12.09.2025, Ergebnisliste jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Fall into Savings: Limited Time 50% OFF!",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "AF3 & 2 others - Ending Soon On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Vaše nabídka: P443813 Softel Con Okna",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Making room for big ideas.",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 11.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 02.10.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck, 03.10.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Forgot Your iPhone Passcode? We Can Remove It in O",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck 12.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 18.09.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Vistrak - Ending Soon On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Tradiční české výrobky",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 11.09.2025, Auktionserinnerung",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Vibe Coding & WK1 Flashlight - Just Launched On Ki",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Chaos to Croissants & Maglynx - Just Launched On K",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "EXO The Golf Glove - Just Launched On Kickstarter",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "VoltBot & ROSESELSA Sports Earphones - Trending On",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Best Windows backup software: Protect your data!",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Exklusive Farbsteine, 26.09.2025, Katalog jetzt on",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Erlesener Schmuck 04.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Erlesener Schmuck, 25.09.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Diamonds Only, 24.09.2025, Katalog jetzt online",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "SpeechGen Account Recovery",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Top 10 im TV: Die besten Filme am Wochenende",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Top 10 im TV: Die besten Filme am Wochenende",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "➡️ Otevřete tento e-mail a nakupujte s 30% slevou ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Next Gen Cooling Blanket & P101 - Ending Soon On K",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren, 23.09.2025, Katalog jetzt onlin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 04.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "The Ultimate Video Downloader for Social Media – N",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Final Call: Labor Day Savings Are Here!",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Upozornění Google – Bitcoin",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "Schmuck und Uhren 03.09.2025, Ergebnisliste jetzt ",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      },
+      {
+        "subject": "⏰ SPECIÁLNÍ NABÍDKA: Sleva 30 % je prodloužena ⏰",
+        "error": "module 'legal_doc_identifier' has no attribute 'classify_document'"
+      }
+    ]
+  }
+}

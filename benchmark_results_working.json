@@ -1,0 +1,27 @@
+{
+  "universal_business": {
+    "name": "Universal Business Classifier",
+    "total": 200,
+    "processed": 200,
+    "errors": 0,
+    "time": 0.24307489395141602,
+    "speed": 822.7916785185331,
+    "success_rate": 100.0
+  },
+  "reklamni_filtr": {
+    "error": "ReklamniFiltr.__init__() missing 1 required positional argument: 'config'"
+  },
+  "soudni_filtr": {
+    "error": "SoudniFiltr.__init__() missing 1 required positional argument: 'config'"
+  },
+  "cz_receipt": {
+    "name": "CZ Receipt Intelligence",
+    "total": 200,
+    "processed": 200,
+    "errors": 0,
+    "receipts_found": 0,
+    "time": 0.012034177780151367,
+    "speed": 16619.33234274393,
+    "success_rate": 100.0
+  }
+}
