@@ -203,6 +203,7 @@ class ThunderbirdIntegration:
                         results.append({
                             "id": email_id,
                             "sender": self._decode_header(msg.get("From", "")),
+                            "recipient": self._decode_header(msg.get("To", "")),
                             "subject": self._decode_header(msg.get("Subject", "")),
                             "date": date_str,
                             "mailbox": mailbox_name,

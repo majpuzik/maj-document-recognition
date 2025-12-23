@@ -54,6 +54,9 @@ def process_document(
     processor: DocumentProcessor,
     classifier: AIClassifier,
     source: str = "PC slozka",
+    email_from: str = None,
+    email_to: str = None,
+    email_subject: str = None,
 ) -> None:
     """Process a single document"""
     logger = logging.getLogger(__name__)
@@ -75,6 +78,15 @@ def process_document(
             ocr_result.get("metadata", {}),
         )
 
+        # Build metadata with email info
+        doc_metadata = classification.get("metadata", {}) or {}
+        if email_from:
+            doc_metadata["email_from"] = email_from
+        if email_to:
+            doc_metadata["email_to"] = email_to
+        if email_subject:
+            doc_metadata["email_subject"] = email_subject
+
         # Save to database
         logger.info("Saving to database...")
         doc_id = db.insert_document(
@@ -83,8 +95,10 @@ def process_document(
             ocr_confidence=ocr_result.get("confidence", 0),
             document_type=classification.get("type"),
             ai_confidence=classification.get("confidence", 0),
-            metadata=classification.get("metadata", {}),
+            metadata=doc_metadata,
             source=source,
+            sender=email_from,
+            subject=email_subject,
         )
 
         logger.info(f"Document processed successfully (ID: {doc_id})")
@@ -111,10 +125,10 @@ def scan_thunderbird(
 
         logger.info(f"Found {len(emails)} emails with attachments")
 
-        for email in emails:
-            logger.info(f"Processing email from {email.get('sender')} - {email.get('subject')}")
+        for email_data in emails:
+            logger.info(f"Processing email from {email_data.get('sender')} - {email_data.get('subject')}")
 
-            for attachment in email.get("attachments", []):
+            for attachment in email_data.get("attachments", []):
                 process_document(
                     file_path=attachment,
                     config=config,
@@ -122,6 +136,9 @@ def scan_thunderbird(
                     processor=processor,
                     classifier=classifier,
                     source="Email",
+                    email_from=email_data.get("sender"),
+                    email_to=email_data.get("recipient"),
+                    email_subject=email_data.get("subject"),
                 )
 
         logger.info("Thunderbird scan completed")
@@ -145,6 +162,22 @@ def export_to_paperless(config: dict, db: DatabaseManager) -> None:
         for doc in documents:
             logger.info(f"Exporting document {doc['id']}: {doc['file_path']}")
 
+            # Extract email fields from metadata
+            metadata = doc.get("metadata") or {}
+            if isinstance(metadata, str):
+                import json
+                try:
+                    metadata = json.loads(metadata)
+                except:
+                    metadata = {}
+
+            email_from = doc.get("sender") or metadata.get("email_from")
+            email_to = metadata.get("email_to")
+            email_subject = doc.get("subject") or metadata.get("email_subject")
+
+            # Resolve owner from recipient email
+            owner_id = paperless.resolve_owner_from_email(email_to) if email_to else None
+
             result = paperless.upload_document(
                 file_path=doc["file_path"],
                 title=doc.get("title"),
@@ -152,11 +185,16 @@ def export_to_paperless(config: dict, db: DatabaseManager) -> None:
                 tags=doc.get("tags", []),
                 correspondent=doc.get("correspondent"),
                 source=doc.get("source", "PC slozka"),
+                email_from=email_from,
+                email_to=email_to,
+                email_subject=email_subject,
+                owner_id=owner_id,
             )
 
             if result.get("success"):
                 db.mark_document_synced(doc["id"], result.get("paperless_id"))
-                logger.info(f"Document exported successfully (Paperless ID: {result.get('paperless_id')})")
+                owner_info = f", owner={owner_id}" if owner_id else ""
+                logger.info(f"Document exported successfully (Paperless ID: {result.get('paperless_id')}{owner_info})")
             else:
                 logger.error(f"Export failed: {result.get('error')}")
 

@@ -13,6 +13,28 @@ import requests
 class PaperlessAPI:
     """Integration with Paperless-NGX document management system"""
 
+    # Email to user ID mapping
+    # Maps email addresses/patterns to Paperless user IDs
+    EMAIL_TO_USER_MAP = {
+        # puzik (ID: 4) - all variants
+        "puzik@outlook.com": 4,
+        "majpuzik@gmail.com": 4,
+        "puzik@puzik.cz": 4,
+        "maj@puzik.cz": 4,
+        "m.a.j.puzik": 4,
+        "maj.puzik": 4,
+        # martin (ID: 5)
+        "martin@puzik.cz": 5,
+        "martin.puzik": 5,
+        "martinpuzik": 5,
+        # zuzana (ID: 6)
+        "zuzana@puzik.cz": 6,
+        "zuzana.puzikova": 6,
+        "puzikova@": 6,
+        "zuzana.puzik": 6,
+        "zuzanapuzik": 6,
+    }
+
     def __init__(self, config: dict):
         """
         Initialize PaperlessAPI
@@ -37,6 +59,39 @@ class PaperlessAPI:
         self._tag_cache = {}
         self._correspondent_cache = {}
         self._document_type_cache = {}
+
+    def resolve_owner_from_email(self, email: str) -> Optional[int]:
+        """
+        Resolve Paperless user ID from email address
+
+        Args:
+            email: Email address (can be full "Name <email@domain.com>" format)
+
+        Returns:
+            User ID or None if not found
+        """
+        if not email:
+            return None
+
+        email_lower = email.lower()
+
+        # Extract email from "Name <email@domain.com>" format
+        import re
+        match = re.search(r'<([^>]+)>', email_lower)
+        if match:
+            email_lower = match.group(1)
+
+        # Direct match
+        if email_lower in self.EMAIL_TO_USER_MAP:
+            return self.EMAIL_TO_USER_MAP[email_lower]
+
+        # Partial match (for patterns like "puzikova@")
+        for pattern, user_id in self.EMAIL_TO_USER_MAP.items():
+            if pattern in email_lower or email_lower.startswith(pattern.rstrip('@')):
+                return user_id
+
+        self.logger.debug(f"No user mapping found for email: {email}")
+        return None
 
     def _make_request(
         self,
@@ -294,6 +349,48 @@ class PaperlessAPI:
             self.logger.error(f"Error setting custom field: {e}")
             return False
 
+    def set_document_owner(self, document_id: int, owner_id: int) -> bool:
+        """
+        Set document owner
+
+        Args:
+            document_id: Paperless document ID
+            owner_id: Paperless user ID
+
+        Returns:
+            True if successful
+        """
+        try:
+            result = self._make_request(
+                "PATCH",
+                f"documents/{document_id}/",
+                data={"owner": owner_id},
+            )
+            if result.get("success"):
+                self.logger.info(f"Set owner={owner_id} for document {document_id}")
+                return True
+            return False
+        except Exception as e:
+            self.logger.error(f"Error setting owner: {e}")
+            return False
+
+    def get_user_by_username(self, username: str) -> Optional[int]:
+        """
+        Get user ID by username
+
+        Args:
+            username: Paperless username
+
+        Returns:
+            User ID or None
+        """
+        result = self._make_request("GET", f"users/?username={username}")
+        if result.get("success"):
+            results = result.get("data", {}).get("results", [])
+            if results:
+                return results[0]["id"]
+        return None
+
     def upload_document(
         self,
         file_path: str,
@@ -302,6 +399,10 @@ class PaperlessAPI:
         correspondent: Optional[str] = None,
         tags: Optional[List[str]] = None,
         source: Optional[str] = None,
+        email_from: Optional[str] = None,
+        email_to: Optional[str] = None,
+        email_subject: Optional[str] = None,
+        owner_id: Optional[int] = None,
     ) -> Dict:
         """
         Upload document to Paperless-NGX
@@ -313,12 +414,19 @@ class PaperlessAPI:
             correspondent: Correspondent name
             tags: List of tag names
             source: Document source ("Email", "PC slozka", "Sken")
+            email_from: Sender email address
+            email_to: Recipient email address
+            email_subject: Email subject
+            owner_id: Paperless user ID for document ownership
 
         Returns:
             Upload result dictionary
         """
-        # Field ID pro zdroj_dokumentu
+        # Custom field IDs
         ZDROJ_FIELD_ID = 149
+        EMAIL_FROM_FIELD_ID = 137
+        EMAIL_TO_FIELD_ID = 138
+        EMAIL_SUBJECT_FIELD_ID = 139
         if not Path(file_path).exists():
             return {
                 "success": False,
@@ -376,10 +484,24 @@ class PaperlessAPI:
                 paperless_id = result.get("data", {}).get("id")
                 self.logger.info(f"Document uploaded successfully: {file_path}")
 
-                # Set source field if provided
-                if source and paperless_id:
-                    self.set_custom_field(paperless_id, ZDROJ_FIELD_ID, source)
-                    self.logger.info(f"Set zdroj_dokumentu={source} for document {paperless_id}")
+                # Set custom fields after upload
+                if paperless_id:
+                    # Source field
+                    if source:
+                        self.set_custom_field(paperless_id, ZDROJ_FIELD_ID, source)
+                        self.logger.info(f"Set zdroj_dokumentu={source} for document {paperless_id}")
+
+                    # Email fields
+                    if email_from:
+                        self.set_custom_field(paperless_id, EMAIL_FROM_FIELD_ID, email_from)
+                    if email_to:
+                        self.set_custom_field(paperless_id, EMAIL_TO_FIELD_ID, email_to)
+                    if email_subject:
+                        self.set_custom_field(paperless_id, EMAIL_SUBJECT_FIELD_ID, email_subject)
+
+                    # Set owner if provided
+                    if owner_id:
+                        self.set_document_owner(paperless_id, owner_id)
 
                 return {
                     "success": True,
