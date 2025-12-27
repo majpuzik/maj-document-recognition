@@ -1,0 +1,191 @@
+# MAJ Document Recognition - Configuration File
+
+# Application Settings
+app:
+  name: "MAJ Document Recognition"
+  version: "1.0.0"
+  debug: false
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_file: "logs/app.log"
+
+# Web Server Settings
+web:
+  host: "0.0.0.0"
+  port: 5050
+  secret_key: "change-this-secret-key-in-production"
+
+# OCR Settings
+ocr:
+  engine: "tesseract"  # tesseract, easyocr
+  languages:
+    - "ces"  # Czech
+    - "deu"  # German
+    - "eng"  # English
+  preprocessing:
+    enabled: true
+    grayscale: true
+    denoise: true
+    deskew: true
+    contrast_enhancement: true
+  confidence_threshold: 60  # Minimum OCR confidence (0-100)
+
+# AI Classification Settings
+ai:
+  ollama:
+    enabled: false  # Temporarily disabled for MBW batch processing (system overloaded)
+    base_url: "http://localhost:11434"
+    model: "llama3.2:3b"
+    timeout: 30
+    temperature: 0.1
+
+  ml_model:
+    enabled: true
+    auto_train: true
+    min_training_samples: 10
+    retrain_threshold: 50  # Retrain after N new samples
+
+  confidence_threshold: 0.7  # Minimum AI confidence (0-1)
+
+# Document Classification
+classification:
+  types:
+    - "faktura"
+    - "stvrzenka"
+    - "objednavka"
+    - "dodaci_list"
+    - "bankovni_vypis"
+    - "vyzva_k_platbe"
+    - "oznameni_o_zaplaceni"
+    - "oznameni_o_nezaplaceni"
+    - "soudni_dokument"
+    - "reklama"
+    - "obchodni_korespondence"
+    - "jine"
+
+  # Klíčová slova pro detekci
+  keywords:
+    faktura:
+      - "faktura"
+      - "invoice"
+      - "rechnung"
+      - "daňový doklad"
+      - "tax document"
+    stvrzenka:
+      - "stvrzenka"
+      - "paragon"
+      - "receipt"
+      - "beleg"
+      - "účtenka"
+    objednavka:
+      - "objednávka"
+      - "objednávk"
+      - "číslo objednávky"
+      - "obj. číslo"
+      - "obj.č"
+      - "purchase order"
+      - "bestellung"
+      - "bestellnummer"
+      - "po number"
+      - "dodací termín"
+      - "delivery date"
+      - "liefertermin"
+    dodaci_list:
+      - "dodací list"
+      - "dodací l"
+      - "číslo dl"
+      - "dl č"
+      - "delivery note"
+      - "lieferschein"
+      - "packing slip"
+      - "expedováno"
+      - "hmotnost"
+      - "počet balíků"
+      - "gewicht"
+      - "pakete"
+      - "shipped"
+    bankovni_vypis:
+      - "výpis"
+      - "bank statement"
+      - "kontoauszug"
+      - "zůstatek"
+      - "balance"
+    soudni_dokument:
+      - "soud"
+      - "soudní"
+      - "justice"
+      - "gericht"
+      - "rozsudek"
+      - "usnesení"
+      - "trestní"
+    reklama:
+      - "sleva"
+      - "akce"
+      - "výprodej"
+      - "sale"
+      - "rabatt"
+      - "odhláste"
+      - "unsubscribe"
+      - "newsletter"
+
+# Thunderbird Integration
+thunderbird:
+  profile_path: "/Users/m.a.j.puzik/Library/Thunderbird/Profiles/1oli4gwg.default-esr"
+  # Pro IMAP účty - přímá cesta k mailboxu
+  imap_mailbox_path: "/Users/m.a.j.puzik/Library/Thunderbird/Profiles/1oli4gwg.default-esr/ImapMail/email.active24-3.com/INBOX"
+  mailboxes:
+    - "INBOX"
+  attachment_types:
+    - ".pdf"
+    - ".jpg"
+    - ".jpeg"
+    - ".png"
+    - ".docx"
+    - ".doc"
+    - ".xlsx"
+    - ".xls"
+  max_days_back: 999999  # Všechny emaily
+  batch_size: 100
+
+# Paperless-NGX Integration
+paperless:
+  enabled: true
+  url: "http://100.96.204.120:8020"
+  api_token: "e264c40b31756898bcb258d346c891a6d1b9d1be"
+  verify_ssl: true
+  auto_create_tags: true
+  auto_create_correspondents: true
+  auto_create_document_types: true
+  check_duplicates: true
+  duplicate_check_method: "checksum"  # checksum, title, content
+
+# Blacklist/Whitelist
+lists:
+  blacklist_file: "config/blacklist.pkl"
+  whitelist_file: "config/whitelist.pkl"
+  auto_update: true
+
+# Database Settings
+database:
+  path: "data/documents.db"
+  backup_enabled: true
+  backup_interval_days: 7
+
+# File Storage
+storage:
+  upload_folder: "data/uploads"
+  temp_folder: "data/temp"
+  max_file_size_mb: 50
+  allowed_extensions:
+    - "pdf"
+    - "jpg"
+    - "jpeg"
+    - "png"
+    - "docx"
+    - "eml"
+    - "msg"
+
+# Performance
+performance:
+  max_workers: 4  # Parallel processing threads
+  cache_enabled: true
+  cache_size_mb: 100
