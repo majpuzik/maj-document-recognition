@@ -269,15 +269,16 @@ class SchemaValidator:
 
 # Paperless-NGX Custom Field Mapping
 # NOTE: IDs are instance-specific! Use get_field_id() for runtime lookup.
-# DGX (spark-47f9): predmet_nazev=31, predmet_typ=30, is_isdoc=150-152
-# Dell-WS: invoice_subject=23-27
+# All instances now use unified English field names:
+# DGX: invoice_subject=31, item_type=30, is_isdoc=150, isdoc_version=151, isdoc_uuid=152
+# Dell-WS: invoice_subject=23, item_type=24, is_isdoc=25, isdoc_version=26, isdoc_uuid=27
 
-# Field name aliases for cross-instance compatibility
+# Field name aliases (all instances now use English names)
 FIELD_NAME_ALIASES = {
-    'invoice_subject': ['invoice_subject', 'predmet_nazev', 'predmet_faktury'],
-    'item_type': ['item_type', 'predmet_typ', 'typ_polozky'],
-    'is_isdoc': ['is_isdoc', 'je_isdoc'],
-    'isdoc_version': ['isdoc_version', 'isdoc_verze'],
+    'invoice_subject': ['invoice_subject'],
+    'item_type': ['item_type'],
+    'is_isdoc': ['is_isdoc'],
+    'isdoc_version': ['isdoc_version'],
     'isdoc_uuid': ['isdoc_uuid'],
 }
 
