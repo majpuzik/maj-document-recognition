@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 """
+NAS5 Docker Apps Collection
+"""
+
+"""
+This project implements a Model Context Protocol (MCP) server that allows interaction with Gmail accounts via IMAP and SMTP. It provides tools for searching emails, retrieving content, managing labels
+"""
+
+"""
+This project implements a Model Context Protocol (MCP) server that allows interaction with Gmail accounts via IMAP and SMTP. It provides tools for searching emails, retrieving content, managing labels
+"""
+
+"""
 JSON Schemas for Structured Data Extraction
 Validates output from data extractors
 
@@ -16,6 +28,26 @@ INVOICE_LINE_ITEMS_SCHEMA = {
     "type": "object",
     "required": ["line_items", "summary"],
     "properties": {
+        # NEW v1.1: Invoice subject (předmět faktury)
+        "subject": {
+            "type": "string",
+            "description": "Předmět faktury - souhrn fakturovaných položek"
+        },
+        # NEW v1.1: Item type classification
+        "item_type": {
+            "type": "string",
+            "enum": ["service", "goods", "mixed"],
+            "description": "Typ položek: služba, zboží, nebo mix"
+        },
+        # NEW v1.1: ISDOC metadata
+        "isdoc": {
+            "type": "object",
+            "properties": {
+                "is_isdoc": {"type": "boolean"},
+                "version": {"type": "string"},
+                "uuid": {"type": "string"}
+            }
+        },
         "line_items": {
             "type": "array",
             "items": {
@@ -30,7 +62,13 @@ INVOICE_LINE_ITEMS_SCHEMA = {
                     "vat_rate": {"type": "integer", "enum": [0, 10, 15, 21]},
                     "vat_amount": {"type": "number", "minimum": 0},
                     "total_net": {"type": "number", "minimum": 0},
-                    "total_gross": {"type": "number", "minimum": 0}
+                    "total_gross": {"type": "number", "minimum": 0},
+                    # NEW v1.1: Per-item type classification
+                    "item_type": {
+                        "type": "string",
+                        "enum": ["service", "goods"],
+                        "description": "Typ položky: služba nebo zboží"
+                    }
                 }
             }
         },
@@ -355,6 +393,44 @@ PAPERLESS_CUSTOM_FIELDS = {
         'id': 22,
         'name': 'Receipt Items (JSON)',
         'data_type': 'string'  # JSON stored as string
+    },
+
+    # === NEW FIELDS v1.1 (2025-12-27) ===
+    # Invoice subject/description (předmět faktury)
+    'invoice_subject': {
+        'id': 23,
+        'name': 'Invoice Subject',
+        'data_type': 'string',
+        'description': 'Předmět faktury - souhrn fakturovaných položek'
+    },
+
+    # Item type classification (služba/zboží)
+    'item_type': {
+        'id': 24,
+        'name': 'Item Type',
+        'data_type': 'select',
+        'choices': ['service', 'goods', 'mixed'],
+        'description': 'Typ položek: služba (service), zboží (goods), nebo mix (mixed)'
+    },
+
+    # ISDOC detection and content
+    'is_isdoc': {
+        'id': 25,
+        'name': 'Is ISDOC',
+        'data_type': 'boolean',
+        'description': 'Dokument obsahuje nebo je ISDOC XML'
+    },
+    'isdoc_version': {
+        'id': 26,
+        'name': 'ISDOC Version',
+        'data_type': 'string',
+        'description': 'Verze ISDOC formátu (např. 6.0.2)'
+    },
+    'isdoc_uuid': {
+        'id': 27,
+        'name': 'ISDOC UUID',
+        'data_type': 'string',
+        'description': 'Unikátní identifikátor ISDOC dokumentu'
     }
 }
 
@@ -386,6 +462,39 @@ def format_for_paperless(extracted_data: Dict[str, Any], doc_type: str) -> Dict[
                 {'field': PAPERLESS_CUSTOM_FIELDS['currency']['id'],
                  'value': summary.get('currency', 'CZK')}
             ])
+
+        # NEW v1.1: Invoice subject (předmět faktury)
+        if 'subject' in extracted_data:
+            custom_fields.append({
+                'field': PAPERLESS_CUSTOM_FIELDS['invoice_subject']['id'],
+                'value': extracted_data['subject']
+            })
+
+        # NEW v1.1: Item type (služba/zboží)
+        if 'item_type' in extracted_data:
+            custom_fields.append({
+                'field': PAPERLESS_CUSTOM_FIELDS['item_type']['id'],
+                'value': extracted_data['item_type']
+            })
+
+        # NEW v1.1: ISDOC metadata
+        if 'isdoc' in extracted_data:
+            isdoc = extracted_data['isdoc']
+            if isdoc.get('is_isdoc'):
+                custom_fields.append({
+                    'field': PAPERLESS_CUSTOM_FIELDS['is_isdoc']['id'],
+                    'value': 'true'
+                })
+            if isdoc.get('version'):
+                custom_fields.append({
+                    'field': PAPERLESS_CUSTOM_FIELDS['isdoc_version']['id'],
+                    'value': isdoc['version']
+                })
+            if isdoc.get('uuid'):
+                custom_fields.append({
+                    'field': PAPERLESS_CUSTOM_FIELDS['isdoc_uuid']['id'],
+                    'value': isdoc['uuid']
+                })
 
         # Structured data as JSON
         if 'line_items' in extracted_data:

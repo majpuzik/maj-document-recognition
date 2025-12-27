@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 """
+NAS5 Docker Apps Collection
+"""
+
+"""
+This project implements a Model Context Protocol (MCP) server that allows interaction with Gmail accounts via IMAP and SMTP. It provides tools for searching emails, retrieving content, managing labels
+"""
+
+"""
+This project implements a Model Context Protocol (MCP) server that allows interaction with Gmail accounts via IMAP and SMTP. It provides tools for searching emails, retrieving content, managing labels
+"""
+
+"""
 Structured Data Extractors v1.0
 Extracts line-by-line structured data from business documents
 
@@ -135,6 +147,27 @@ class InvoiceExtractor(DataExtractorBase):
     RE_ITEM_CODE = re.compile(r'\b([A-Z0-9]{3,})\b')
     RE_VAT_RATE = re.compile(r'(?:DPH|VAT)\s*(\d{1,2})\s*%', re.I)
 
+    # NEW v1.1: Subject extraction patterns
+    RE_SUBJECT = re.compile(r'(?:předmět|subject|popis|description)[\s:]+(.+)', re.I)
+    RE_ISDOC = re.compile(r'<\?xml.*?ISDOC|isdoc.*?version|xmlns.*?isdoc', re.I | re.DOTALL)
+    RE_ISDOC_VERSION = re.compile(r'version=["\']?(\d+\.\d+\.?\d*)["\']?', re.I)
+    RE_ISDOC_UUID = re.compile(r'<ID>([a-f0-9\-]{36})</ID>', re.I)
+
+    # NEW v1.1: Service vs Goods detection keywords
+    SERVICE_KEYWORDS = [
+        'služba', 'služby', 'service', 'services', 'práce', 'work',
+        'poradenství', 'consulting', 'podpora', 'support', 'údržba',
+        'maintenance', 'licence', 'license', 'předplatné', 'subscription',
+        'pronájem', 'rental', 'hosting', 'api', 'software', 'saas',
+        'měsíční', 'monthly', 'roční', 'yearly', 'annual'
+    ]
+    GOODS_KEYWORDS = [
+        'zboží', 'goods', 'materiál', 'material', 'produkt', 'product',
+        'výrobek', 'item', 'kus', 'ks', 'pcs', 'balení', 'package',
+        'hardware', 'přístroj', 'device', 'součástka', 'component',
+        'náhradní díl', 'spare part', 'spotřební', 'consumable'
+    ]
+
     # Table section markers
     TABLE_START_MARKERS = [
         'položky', 'items', 'popis', 'description',
@@ -146,7 +179,7 @@ class InvoiceExtractor(DataExtractorBase):
     ]
 
     def extract(self, text: str, ocr_data: Optional[Dict] = None) -> Dict[str, Any]:
-        """Extract all invoice line items"""
+        """Extract all invoice line items with subject, item_type, and ISDOC detection"""
         try:
             # Find table region
             table_region = self._find_table_region(text, ocr_data)
@@ -163,20 +196,111 @@ class InvoiceExtractor(DataExtractorBase):
             for idx, row_text in enumerate(rows, 1):
                 item = self._parse_line_item(idx, row_text)
                 if item:
+                    # NEW v1.1: Detect item type per line
+                    item['item_type'] = self._detect_item_type(item.get('description', ''))
                     line_items.append(item)
 
             # Calculate summary
             summary = self._calculate_summary(line_items)
 
-            return {
+            # NEW v1.1: Extract invoice subject
+            subject = self._extract_subject(text, line_items)
+
+            # NEW v1.1: Determine overall item type
+            item_type = self._determine_overall_item_type(line_items)
+
+            # NEW v1.1: Detect ISDOC
+            isdoc_info = self._detect_isdoc(text)
+
+            result = {
                 'line_items': line_items,
                 'summary': summary,
                 'extraction_confidence': self._calculate_confidence(line_items, text)
             }
 
+            # Add new fields if detected
+            if subject:
+                result['subject'] = subject
+            if item_type:
+                result['item_type'] = item_type
+            if isdoc_info.get('is_isdoc'):
+                result['isdoc'] = isdoc_info
+
+            return result
+
         except Exception as e:
             self.logger.error(f"Invoice extraction failed: {e}")
             return self._empty_result()
+
+    def _extract_subject(self, text: str, line_items: List[Dict]) -> Optional[str]:
+        """NEW v1.1: Extract invoice subject (předmět faktury)"""
+        # Try to find explicit subject line
+        match = self.RE_SUBJECT.search(text)
+        if match:
+            subject = match.group(1).strip()
+            if len(subject) > 5:  # Reasonable subject
+                return subject[:200]  # Limit length
+
+        # Fallback: Generate from line items
+        if line_items:
+            descriptions = [item.get('description', '') for item in line_items[:3]]
+            descriptions = [d for d in descriptions if d]
+            if descriptions:
+                if len(descriptions) == 1:
+                    return descriptions[0][:200]
+                else:
+                    return f"{descriptions[0][:100]} a další ({len(line_items)} položek)"
+
+        return None
+
+    def _detect_item_type(self, description: str) -> str:
+        """NEW v1.1: Detect if item is service or goods"""
+        desc_lower = description.lower()
+
+        service_score = sum(1 for kw in self.SERVICE_KEYWORDS if kw in desc_lower)
+        goods_score = sum(1 for kw in self.GOODS_KEYWORDS if kw in desc_lower)
+
+        if service_score > goods_score:
+            return 'service'
+        elif goods_score > service_score:
+            return 'goods'
+        else:
+            return 'goods'  # Default to goods if unclear
+
+    def _determine_overall_item_type(self, line_items: List[Dict]) -> str:
+        """NEW v1.1: Determine overall invoice item type"""
+        if not line_items:
+            return 'mixed'
+
+        types = [item.get('item_type', 'goods') for item in line_items]
+        services = types.count('service')
+        goods = types.count('goods')
+
+        if services > 0 and goods > 0:
+            return 'mixed'
+        elif services > 0:
+            return 'service'
+        else:
+            return 'goods'
+
+    def _detect_isdoc(self, text: str) -> Dict[str, Any]:
+        """NEW v1.1: Detect ISDOC XML in document"""
+        result = {'is_isdoc': False}
+
+        if self.RE_ISDOC.search(text):
+            result['is_isdoc'] = True
+
+            # Extract version
+            version_match = self.RE_ISDOC_VERSION.search(text)
+            if version_match:
+                result['version'] = version_match.group(1)
+
+            # Extract UUID
+            uuid_match = self.RE_ISDOC_UUID.search(text)
+            if uuid_match:
+                result['uuid'] = uuid_match.group(1)
+
+        return result
 
     def _find_table_region(self, text: str, ocr_data: Optional[Dict]) -> Optional[str]:
         """Find the table region in invoice text - IMPROVED VERSION"""
