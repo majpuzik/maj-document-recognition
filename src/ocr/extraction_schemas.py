@@ -268,47 +268,46 @@ class SchemaValidator:
 
 
 # Paperless-NGX Custom Field Mapping
-# NOTE: IDs are instance-specific! Use get_field_id() for runtime lookup.
-# All instances now use unified English field names:
-# DGX: invoice_subject=31, item_type=30, is_isdoc=150, isdoc_version=151, isdoc_uuid=152
-# Dell-WS: invoice_subject=23, item_type=24, is_isdoc=25, isdoc_version=26, isdoc_uuid=27
+# Field IDs are loaded at runtime from Paperless API - no hardcoded instance-specific IDs
 
-# Field name aliases (all instances now use English names)
-FIELD_NAME_ALIASES = {
-    'invoice_subject': ['invoice_subject'],
-    'item_type': ['item_type'],
-    'is_isdoc': ['is_isdoc'],
-    'isdoc_version': ['isdoc_version'],
-    'isdoc_uuid': ['isdoc_uuid'],
-}
-
-# Pre-configured instance mappings
-INSTANCE_FIELD_MAPPINGS = {
-    'dgx': {
-        'invoice_subject': 31, 'item_type': 30,
-        'is_isdoc': 150, 'isdoc_version': 151, 'isdoc_uuid': 152,
-    },
-    'dell-ws': {
-        'invoice_subject': 23, 'item_type': 24,
-        'is_isdoc': 25, 'isdoc_version': 26, 'isdoc_uuid': 27,
-    }
-}
+_field_cache: Dict[str, int] = {}
 
 
-def get_field_id(field_key: str, paperless_fields: Dict[str, int] = None) -> Optional[int]:
-    """Get Paperless field ID with alias support."""
-    if paperless_fields is None:
-        return PAPERLESS_CUSTOM_FIELDS.get(field_key, {}).get('id')
-    aliases = FIELD_NAME_ALIASES.get(field_key, [field_key])
-    for alias in aliases:
-        if alias in paperless_fields:
-            return paperless_fields[alias]
-    return PAPERLESS_CUSTOM_FIELDS.get(field_key, {}).get('id')
+def load_field_ids(api_url: str, api_token: str) -> Dict[str, int]:
+    """
+    Load custom field name->ID mappings from Paperless API.
+    Call once at startup, result is cached.
+
+    Args:
+        api_url: Paperless API URL (e.g., "http://localhost:8000/api")
+        api_token: Paperless API token
+
+    Returns:
+        Dict mapping field names to IDs
+    """
+    global _field_cache
+    if _field_cache:
+        return _field_cache
+
+    try:
+        import requests
+        resp = requests.get(
+            f"{api_url}/custom_fields/",
+            headers={"Authorization": f"Token {api_token}"},
+            timeout=10
+        )
+        if resp.status_code == 200:
+            for field in resp.json().get('results', []):
+                _field_cache[field['name']] = field['id']
+    except Exception as e:
+        print(f"Warning: Failed to load Paperless fields: {e}")
+
+    return _field_cache
 
 
-def get_instance_mappings(instance: str) -> Dict[str, int]:
-    """Get pre-configured field mappings for known Paperless instances."""
-    return INSTANCE_FIELD_MAPPINGS.get(instance, {})
+def get_field_id(field_name: str) -> Optional[int]:
+    """Get field ID by name from cache. Call load_field_ids() first."""
+    return _field_cache.get(field_name)
 
 
 PAPERLESS_CUSTOM_FIELDS = {
@@ -478,24 +477,23 @@ PAPERLESS_CUSTOM_FIELDS = {
 }
 
 
-def format_for_paperless(extracted_data: Dict[str, Any], doc_type: str,
-                         instance: str = None) -> Dict[str, Any]:
+def format_for_paperless(extracted_data: Dict[str, Any], doc_type: str) -> Dict[str, Any]:
     """
-    Format extracted data for Paperless-NGX custom fields
+    Format extracted data for Paperless-NGX custom fields.
+
+    NOTE: Call load_field_ids(api_url, token) once before using this function!
 
     Args:
         extracted_data: Output from data extractors
         doc_type: 'invoice', 'bank_statement', or 'receipt'
-        instance: Optional instance name ('dgx', 'dell-ws') for correct field IDs
 
     Returns:
         Paperless-NGX custom fields array
     """
     custom_fields = []
-    field_map = get_instance_mappings(instance) if instance else {}
 
-    def _id(key: str) -> int:
-        return get_field_id(key, field_map)
+    def _id(key: str) -> Optional[int]:
+        return get_field_id(key)
 
     if doc_type == 'invoice':
         # Basic financial fields
