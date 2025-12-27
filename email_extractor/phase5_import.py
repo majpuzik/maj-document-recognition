@@ -57,7 +57,8 @@ RESULTS_DIR = BASE_DIR / "phase1_results"
 PHASE2_DIR = BASE_DIR / "phase2_results"
 EMAIL_DIR = ACASIS_ROOT / "parallel_scan_1124_1205/thunderbird-emails"
 
-# 31 Custom Fields mapping (field_name -> paperless_data_type)
+# Custom Fields mapping (field_name -> paperless_data_type)
+# v1.1: Added invoice_subject, item_type, is_isdoc, isdoc_version, isdoc_uuid
 CUSTOM_FIELDS = {
     "doc_typ": "string",
     "protistrana_nazev": "string",
@@ -85,6 +86,13 @@ CUSTOM_FIELDS = {
     "ai_popis": "string",
     "typ_sluzby": "string",
     "nazev_sluzby": "string",
+    # v1.1: New invoice line item fields
+    "invoice_subject": "string",      # Předmět faktury (položky)
+    "item_type": "string",            # service / goods / mixed
+    "is_isdoc": "boolean",            # ISDOC format detected
+    "isdoc_version": "string",        # ISDOC version (e.g. 6.0.2)
+    "isdoc_uuid": "string",           # ISDOC UUID
+    # Legacy names (backward compatibility)
     "predmet_typ": "string",
     "predmet_nazev": "string",
     "polozky_text": "string",

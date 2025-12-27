@@ -32,6 +32,20 @@ try:
 except ImportError:
     HAS_TQDM = False
 
+# Add parent for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Invoice line items extractor (v1.1 - item_type, is_isdoc)
+try:
+    from src.ocr.data_extractors import InvoiceExtractor
+    INVOICE_EXTRACTOR = InvoiceExtractor()
+    INVOICE_EXTRACTOR_AVAILABLE = True
+except ImportError:
+    INVOICE_EXTRACTOR_AVAILABLE = False
+
+# Document types that need invoice line extraction
+INVOICE_TYPES = {"invoice", "receipt", "tax_document", "faktura", "uctenka", "danovy_doklad"}
+
 # Auto-detect mount point
 if Path("/home/puzik/mnt/acasis").exists():
     ACASIS_ROOT = Path("/home/puzik/mnt/acasis")
@@ -325,6 +339,34 @@ def process_email(email_data: dict, body: str) -> dict:
         result["extracted_fields"]["email_from"] = meta.get("from", "")
         result["extracted_fields"]["email_to"] = meta.get("to", "")
         result["extracted_fields"]["email_subject"] = meta.get("subject", "")
+
+        # v1.1: Extract invoice line items with item_type and ISDOC detection
+        if INVOICE_EXTRACTOR_AVAILABLE and doc_type.lower() in INVOICE_TYPES:
+            try:
+                invoice_data = INVOICE_EXTRACTOR.extract(body)
+                if invoice_data:
+                    # Add invoice_subject (from line items descriptions)
+                    if invoice_data.get("subject"):
+                        result["extracted_fields"]["invoice_subject"] = invoice_data["subject"]
+
+                    # Add item_type (service/goods/mixed)
+                    if invoice_data.get("item_type"):
+                        result["extracted_fields"]["item_type"] = invoice_data["item_type"]
+
+                    # Add ISDOC detection
+                    isdoc = invoice_data.get("isdoc", {})
+                    if isdoc.get("is_isdoc"):
+                        result["extracted_fields"]["is_isdoc"] = True
+                        result["extracted_fields"]["isdoc_version"] = isdoc.get("version", "")
+                        result["extracted_fields"]["isdoc_uuid"] = isdoc.get("uuid", "")
+
+                    # Add line items as JSON
+                    if invoice_data.get("line_items"):
+                        result["extracted_fields"]["polozky_json"] = json.dumps(
+                            invoice_data["line_items"], ensure_ascii=False
+                        )
+            except Exception as e:
+                logger.debug(f"Invoice extraction failed: {e}")
 
         return result
 
