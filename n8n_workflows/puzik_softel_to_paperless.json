@@ -1,0 +1,165 @@
+{
+  "name": "puzik-softel-to-paperless",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.10.110:8765/api/scan",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "mailbox_path",
+              "value": "/Users/m.a.j.puzik/Library/Thunderbird/Profiles/1oli4gwg.default-esr/ImapMail/email.active24-3.com/INBOX"
+            },
+            {
+              "name": "extract_to",
+              "value": "/tmp/maj_puzik_softel_attachments"
+            },
+            {
+              "name": "max_emails",
+              "value": "999999"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 300000
+        }
+      },
+      "id": "scan",
+      "name": "Scan Mailbox",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split",
+      "name": "Split Attachments",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.10.110:8765/api/workflow",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"file_path\": \"{{ $json.file_path }}\",\n  \"subject\": \"{{ $json.subject }}\",\n  \"from\": \"{{ $json.from }}\",\n  \"to\": \"{{ $json.to }}\",\n  \"date\": \"{{ $json.date }}\",\n  \"paperless_url\": \"http://100.96.204.120:8020\",\n  \"paperless_token\": \"e264c40b31756898bcb258d346c891a6d1b9d1be\",\n  \"user_tag\": \"puzik\"\n}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "workflow",
+      "name": "Process & Upload",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData"
+      },
+      "id": "aggregate",
+      "name": "Aggregate Results",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Summary of processing\nconst items = $input.all();\nconst results = items.map(i => i.json);\n\nconst success = results.filter(r => r.success === true).length;\nconst failed = results.filter(r => r.success !== true).length;\nconst duplicates = results.filter(r => r.paperless?.duplicate === true).length;\n\nreturn [{\n  json: {\n    summary: {\n      total: results.length,\n      success: success,\n      failed: failed,\n      duplicates: duplicates,\n      timestamp: new Date().toISOString()\n    },\n    details: results\n  }\n}];"
+      },
+      "id": "summary",
+      "name": "Generate Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Scan Mailbox",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scan Mailbox": {
+      "main": [
+        [
+          {
+            "node": "Split Attachments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Attachments": {
+      "main": [
+        [
+          {
+            "node": "Process & Upload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Aggregate Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process & Upload": {
+      "main": [
+        [
+          {
+            "node": "Split Attachments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Results": {
+      "main": [
+        [
+          {
+            "node": "Generate Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["paperless", "document-recognition", "puzik"],
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "maj-document-recognition"
+  }
+}

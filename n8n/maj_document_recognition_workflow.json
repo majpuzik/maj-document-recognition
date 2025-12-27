@@ -1,0 +1,269 @@
+{
+  "name": "MAJ Document Recognition - Email Classification",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "mailbox": "INBOX",
+        "limit": 10,
+        "options": {
+          "returnAll": false
+        }
+      },
+      "id": "imap",
+      "name": "Get Emails (IMAP)",
+      "type": "n8n-nodes-base.imap",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "imap": {
+          "id": "1",
+          "name": "IMAP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.10.35:8765/api/classify",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.textPlain || $json.textHtml }}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "from",
+              "value": "={{ $json.from }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "classify",
+      "name": "Classify Document (API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.doc_type }}",
+              "operation": "equals",
+              "value2": "invoice"
+            }
+          ]
+        }
+      },
+      "id": "is_invoice",
+      "name": "Is Invoice?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.10.85:8777/api/documents/post_document/",
+        "authentication": "headerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Token YOUR_PAPERLESS_TOKEN"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.extracted_fields.email_subject || 'Imported Document' }}"
+            },
+            {
+              "name": "document_type",
+              "value": "Faktura"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "upload_invoice",
+      "name": "Upload Invoice to Paperless",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1050, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://192.168.10.85:8777/api/documents/post_document/",
+        "authentication": "headerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Token YOUR_PAPERLESS_TOKEN"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.extracted_fields.email_subject || 'Imported Document' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "upload_other",
+      "name": "Upload Other to Paperless",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1050, 400]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=http://192.168.10.85:8777/api/documents/{{ $json.id }}/",
+        "authentication": "headerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Token YOUR_PAPERLESS_TOKEN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"custom_fields\": [\n    {\"field\": 1, \"value\": \"{{ $json.extracted_fields.doc_typ }}\"},\n    {\"field\": 2, \"value\": \"{{ $json.extracted_fields.protistrana_nazev }}\"},\n    {\"field\": 3, \"value\": \"{{ $json.extracted_fields.protistrana_ico }}\"},\n    {\"field\": 5, \"value\": {{ $json.extracted_fields.castka_celkem || 0 }}},\n    {\"field\": 22, \"value\": \"{{ $json.extracted_fields.ai_summary }}\"}\n  ]\n}",
+        "options": {}
+      },
+      "id": "set_custom_fields",
+      "name": "Set Custom Fields",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1250, 300]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Get Emails (IMAP)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Emails (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Classify Document (API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classify Document (API)": {
+      "main": [
+        [
+          {
+            "node": "Is Invoice?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Invoice?": {
+      "main": [
+        [
+          {
+            "node": "Upload Invoice to Paperless",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Upload Other to Paperless",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Invoice to Paperless": {
+      "main": [
+        [
+          {
+            "node": "Set Custom Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Other to Paperless": {
+      "main": [
+        [
+          {
+            "node": "Set Custom Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["MAJ", "Document Recognition", "Paperless"],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-17T00:00:00.000Z",
+  "versionId": "1.2.0"
+}

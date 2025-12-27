@@ -1,0 +1,316 @@
+{
+  "id": "almquist-health-monitor-v1",
+  "name": "Almquist Health Monitor",
+  "active": false,
+  "versionId": "1.0.0",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Every 5 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, name, host, ports, health_check_url, priority, status FROM services WHERE priority IN ('critical', 'high', 'normal') ORDER BY priority DESC",
+        "options": {}
+      },
+      "id": "get_services",
+      "name": "Get Services from CDB",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [460, 300],
+      "credentials": {
+        "postgres": {
+          "id": "maj-central-db",
+          "name": "MAJ Central DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build health check URLs for all services\nconst services = $input.all();\nconst checks = [];\n\nfor (const item of services) {\n  const svc = item.json;\n  let healthUrl = svc.health_check_url;\n  \n  // If no health_check_url, try to construct from host:port\n  if (!healthUrl && svc.ports) {\n    const ports = typeof svc.ports === 'string' ? JSON.parse(svc.ports) : svc.ports;\n    const httpPort = ports.http || ports['8000'] || ports['5678'] || ports['3000'] || Object.values(ports)[0];\n    \n    if (httpPort && typeof httpPort === 'number') {\n      const hostIp = {\n        'nas5': '192.168.10.35',\n        'dgx': '192.168.10.200',\n        'mac-mini': '192.168.10.83',\n        'dell-ws': '192.168.10.233',\n        'macbook': '192.168.10.102'\n      }[svc.host] || svc.host;\n      \n      healthUrl = `http://${hostIp}:${httpPort}/`;\n    }\n  }\n  \n  if (healthUrl) {\n    checks.push({\n      id: svc.id,\n      name: svc.name,\n      host: svc.host,\n      priority: svc.priority,\n      health_url: healthUrl\n    });\n  }\n}\n\nreturn checks.map(c => ({ json: c }));"
+      },
+      "id": "build_urls",
+      "name": "Build Health URLs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split",
+      "name": "Split Services",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $json.health_url }}",
+        "options": {
+          "timeout": 5000,
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "http_check",
+      "name": "HTTP Health Check",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 200],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst service = $('Split Services').first().json;\n\nconst isHealthy = !input.error && (input.statusCode === undefined || (input.statusCode >= 200 && input.statusCode < 400));\n\nreturn [{\n  json: {\n    service_id: service.id,\n    service_name: service.name,\n    host: service.host,\n    priority: service.priority,\n    health_url: service.health_url,\n    is_healthy: isHealthy,\n    status_code: input.statusCode || null,\n    error: input.error?.message || null,\n    checked_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "process_result",
+      "name": "Process Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData"
+      },
+      "id": "aggregate",
+      "name": "Aggregate All Results",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all().map(i => i.json);\n\nconst healthy = results.filter(r => r.is_healthy).length;\nconst unhealthy = results.filter(r => !r.is_healthy);\nconst critical_down = unhealthy.filter(r => r.priority === 'critical');\nconst high_down = unhealthy.filter(r => r.priority === 'high');\n\nconst summary = {\n  timestamp: new Date().toISOString(),\n  total_checked: results.length,\n  healthy: healthy,\n  unhealthy: unhealthy.length,\n  critical_down: critical_down.length,\n  high_down: high_down.length,\n  should_alert: critical_down.length > 0 || high_down.length > 0,\n  unhealthy_services: unhealthy.map(u => `${u.service_name} (${u.host}): ${u.error || 'HTTP ' + u.status_code}`),\n  details: results\n};\n\nreturn [{ json: summary }];"
+      },
+      "id": "summary",
+      "name": "Generate Summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO events (event_type, component, version, machine, status, metadata) VALUES ('health_check', 'almquist-health-monitor', '1.0', 'n8n-nas5', CASE WHEN $1::int = 0 THEN 'healthy' ELSE 'unhealthy' END, $2::text)",
+        "options": {
+          "queryParams": "={{ [$json.unhealthy, JSON.stringify($json)] }}"
+        }
+      },
+      "id": "log_to_cdb",
+      "name": "Log to CDB",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [2000, 200],
+      "credentials": {
+        "postgres": {
+          "id": "maj-central-db",
+          "name": "MAJ Central DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "alert_condition",
+              "leftValue": "={{ $json.should_alert }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if_alert",
+      "name": "Should Alert?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2000, 400]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=🚨 **Almquist Health Alert**\n\n⏰ {{ $json.timestamp }}\n\n❌ **Unhealthy Services:** {{ $json.unhealthy }}\n🔴 Critical down: {{ $json.critical_down }}\n🟠 High priority down: {{ $json.high_down }}\n\n**Details:**\n{{ $json.unhealthy_services.join('\\n') }}\n\n✅ Healthy: {{ $json.healthy }}/{{ $json.total_checked }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "telegram_alert",
+      "name": "Send Telegram Alert",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [2220, 400],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegram-bot",
+          "name": "Telegram Bot"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "no_alert",
+      "name": "No Alert Needed",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [2220, 300]
+    }
+  ],
+  "connections": {
+    "Every 5 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Get Services from CDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Services from CDB": {
+      "main": [
+        [
+          {
+            "node": "Build Health URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Health URLs": {
+      "main": [
+        [
+          {
+            "node": "Split Services",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Services": {
+      "main": [
+        [
+          {
+            "node": "HTTP Health Check",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Aggregate All Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Health Check": {
+      "main": [
+        [
+          {
+            "node": "Process Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Result": {
+      "main": [
+        [
+          {
+            "node": "Split Services",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate All Results": {
+      "main": [
+        [
+          {
+            "node": "Generate Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Summary": {
+      "main": [
+        [
+          {
+            "node": "Log to CDB",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Should Alert?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Should Alert?": {
+      "main": [
+        [
+          {
+            "node": "No Alert Needed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Telegram Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": ["monitoring", "health", "almquist"],
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "almquist-health-monitor"
+  }
+}
