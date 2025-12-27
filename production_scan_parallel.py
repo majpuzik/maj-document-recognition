@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+MAJ Document Recognition System is a comprehensive OCR system for document classification with AI in
+"""
+
+"""
 Production Email Scanner - Parallel Processing Version
 =======================================================
 Scans emails from Thunderbird INBOX with support for parallel execution

@@ -225,6 +225,9 @@ class AmazonInvoicePDF:
         # Payment info
         story.extend(self._build_payment_info(order))
 
+        # All details section
+        story.extend(self._build_all_details(order))
+
         # Footer
         story.extend(self._build_footer(order))
 
@@ -568,6 +571,165 @@ class AmazonInvoicePDF:
 
             elements.append(Paragraph(payment_content, self.styles['InvoiceNormal']))
             elements.append(Spacer(1, 5*mm))
+
+        return elements
+
+    def _build_all_details(self, order) -> List:
+        """Build section showing ALL extracted data"""
+        elements = []
+
+        elements.append(Paragraph('<b>Všechny údaje / All Details:</b>', self.styles['SectionHeader']))
+
+        # Collect all non-empty fields
+        details = []
+
+        # Order fields
+        if hasattr(order, 'order_number') and order.order_number:
+            details.append(('Číslo objednávky', order.order_number))
+        if hasattr(order, 'invoice_number') and order.invoice_number:
+            details.append(('Číslo faktury', order.invoice_number))
+        if hasattr(order, 'order_date') and order.order_date:
+            details.append(('Datum objednávky', order.order_date.strftime('%d.%m.%Y') if hasattr(order.order_date, 'strftime') else str(order.order_date)))
+        if hasattr(order, 'invoice_date') and order.invoice_date:
+            details.append(('Datum faktury', order.invoice_date.strftime('%d.%m.%Y') if hasattr(order.invoice_date, 'strftime') else str(order.invoice_date)))
+        if hasattr(order, 'due_date') and order.due_date:
+            details.append(('Datum splatnosti', order.due_date.strftime('%d.%m.%Y') if hasattr(order.due_date, 'strftime') else str(order.due_date)))
+        if hasattr(order, 'currency') and order.currency:
+            details.append(('Měna', order.currency))
+        if hasattr(order, 'status') and order.status:
+            details.append(('Stav objednávky', order.status))
+        if hasattr(order, 'invoice_status') and order.invoice_status:
+            details.append(('Stav faktury', order.invoice_status))
+
+        # Customer/User fields
+        if hasattr(order, 'account_group') and order.account_group:
+            details.append(('Příjemce / Firma', order.account_group))
+        if hasattr(order, 'account_user') and order.account_user:
+            details.append(('Kupující', order.account_user))
+        if hasattr(order, 'user_email') and order.user_email:
+            details.append(('E-mail kupujícího', order.user_email))
+        if hasattr(order, 'user_vat_id') and order.user_vat_id:
+            details.append(('DIČ kupujícího', order.user_vat_id))
+        if hasattr(order, 'user_vat_country') and order.user_vat_country:
+            details.append(('Země DIČ', order.user_vat_country))
+        if hasattr(order, 'recipient_name') and order.recipient_name:
+            details.append(('Jméno příjemce', order.recipient_name))
+        if hasattr(order, 'recipient_email') and order.recipient_email:
+            details.append(('E-mail příjemce', order.recipient_email))
+
+        # Address fields
+        if hasattr(order, 'address_line_1') and order.address_line_1:
+            details.append(('Adresa 1', order.address_line_1))
+        if hasattr(order, 'address_line_2') and order.address_line_2:
+            details.append(('Adresa 2', order.address_line_2))
+        if hasattr(order, 'location') and order.location:
+            details.append(('Místo / Město', order.location))
+        if hasattr(order, 'state') and order.state:
+            details.append(('Kraj / Bundesland', order.state))
+        if hasattr(order, 'postal_code') and order.postal_code:
+            details.append(('PSČ', order.postal_code))
+
+        # Delivery fields
+        if hasattr(order, 'delivery_method') and order.delivery_method:
+            details.append(('Způsob doručení', order.delivery_method))
+        if hasattr(order, 'tracking_number') and order.tracking_number:
+            details.append(('Číslo zásilky', order.tracking_number))
+
+        # Payment fields
+        if hasattr(order, 'payment_method') and order.payment_method:
+            details.append(('Platební metoda', order.payment_method))
+        if hasattr(order, 'payment_date') and order.payment_date:
+            details.append(('Datum platby', order.payment_date.strftime('%d.%m.%Y') if hasattr(order.payment_date, 'strftime') else str(order.payment_date)))
+        if hasattr(order, 'payment_reference') and order.payment_reference:
+            details.append(('Reference platby', order.payment_reference))
+
+        # Totals and VAT
+        currency = getattr(order, 'currency', 'EUR')
+        if hasattr(order, 'subtotal') and order.subtotal:
+            details.append(('Mezisoučet', f'{order.subtotal:.2f} {currency}'))
+        if hasattr(order, 'shipping') and order.shipping:
+            details.append(('Doprava (vč. DPH)', f'{order.shipping:.2f} {currency}'))
+        if hasattr(order, 'shipping_excl_vat') and order.shipping_excl_vat:
+            details.append(('Doprava (bez DPH)', f'{order.shipping_excl_vat:.2f} {currency}'))
+        if hasattr(order, 'shipping_vat') and order.shipping_vat:
+            details.append(('DPH dopravy', f'{order.shipping_vat:.2f} {currency}'))
+        if hasattr(order, 'promotion') and order.promotion:
+            details.append(('Sleva (vč. DPH)', f'{order.promotion:.2f} {currency}'))
+        if hasattr(order, 'promotion_excl_vat') and order.promotion_excl_vat:
+            details.append(('Sleva (bez DPH)', f'{order.promotion_excl_vat:.2f} {currency}'))
+        if hasattr(order, 'promotion_vat') and order.promotion_vat:
+            details.append(('DPH slevy', f'{order.promotion_vat:.2f} {currency}'))
+        if hasattr(order, 'vat') and order.vat:
+            details.append(('Celková DPH', f'{order.vat:.2f} {currency}'))
+        if hasattr(order, 'vat_rate') and order.vat_rate:
+            details.append(('Sazba DPH', f'{order.vat_rate:.0f}%'))
+        if hasattr(order, 'total_incl_vat') and order.total_incl_vat:
+            details.append(('CELKEM (vč. DPH)', f'{order.total_incl_vat:.2f} {currency}'))
+
+        # Cost center fields
+        if hasattr(order, 'cost_center') and order.cost_center:
+            details.append(('Nákladové středisko', order.cost_center))
+        if hasattr(order, 'department') and order.department:
+            details.append(('Oddělení', order.department))
+        if hasattr(order, 'project_number') and order.project_number:
+            details.append(('Číslo projektu', order.project_number))
+        if hasattr(order, 'gl_account') and order.gl_account:
+            details.append(('Hlavní účet', order.gl_account))
+
+        # Comments
+        if hasattr(order, 'order_comments') and order.order_comments:
+            details.append(('Poznámky', order.order_comments))
+
+        # Build table
+        if details:
+            table_data = []
+            for label, value in details:
+                table_data.append([
+                    Paragraph(f'{label}:', self.styles['InvoiceSmall']),
+                    Paragraph(str(value), self.styles['InvoiceSmall']),
+                ])
+
+            details_table = Table(table_data, colWidths=[50*mm, 130*mm])
+            details_table.setStyle(TableStyle([
+                ('ALIGN', (0, 0), (0, -1), 'RIGHT'),
+                ('ALIGN', (1, 0), (1, -1), 'LEFT'),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('TOPPADDING', (0, 0), (-1, -1), 1*mm),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 1*mm),
+                ('ROWBACKGROUNDS', (0, 0), (-1, -1), [colors.white, AMAZON_LIGHT_GRAY]),
+            ]))
+
+            elements.append(details_table)
+
+        # Item details (per-item additional info)
+        if hasattr(order, 'items') and order.items:
+            elements.append(Spacer(1, 3*mm))
+            elements.append(Paragraph('<b>Detaily položek / Item Details:</b>', self.styles['InvoiceSmall']))
+
+            for idx, item in enumerate(order.items, 1):
+                item_details = []
+                if hasattr(item, 'asin') and item.asin:
+                    item_details.append(f'ASIN: {item.asin}')
+                if hasattr(item, 'seller_name') and item.seller_name:
+                    item_details.append(f'Prodejce: {item.seller_name}')
+                if hasattr(item, 'seller_vat_id') and item.seller_vat_id:
+                    item_details.append(f'DIČ prodejce: {item.seller_vat_id}')
+                if hasattr(item, 'brand') and item.brand:
+                    item_details.append(f'Značka: {item.brand}')
+                if hasattr(item, 'manufacturer') and item.manufacturer:
+                    item_details.append(f'Výrobce: {item.manufacturer}')
+                if hasattr(item, 'model_number') and item.model_number:
+                    item_details.append(f'Model: {item.model_number}')
+                if hasattr(item, 'unspsc') and item.unspsc:
+                    item_details.append(f'UNSPSC: {item.unspsc}')
+                if hasattr(item, 'condition') and item.condition:
+                    item_details.append(f'Stav: {item.condition}')
+
+                if item_details:
+                    title = getattr(item, 'title', 'Položka')[:40] + '...' if len(getattr(item, 'title', '')) > 40 else getattr(item, 'title', 'Položka')
+                    elements.append(Paragraph(f'<b>{idx}. {title}</b>: {" | ".join(item_details)}', self.styles['InvoiceSmall']))
+
+        elements.append(Spacer(1, 5*mm))
 
         return elements
 

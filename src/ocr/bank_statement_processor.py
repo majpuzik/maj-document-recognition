@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+** The project "maj-document-recognition-v2/src" is a document matching system that automates the pr
+"""
+
+"""
 Bank Statement Processor for Czech Banks v2.2
 Supports analysis, tagging, PDF conversion, and Paperless-NGX integration
 

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+** The project "maj-document-recognition-v2/src" is a document matching system that automates the pr
+"""
+
+"""
 CASCADE OCR - rychlejší než multi-language
 Zkouší jazyky postupně: CZ → EN → DE místo všech najednou
 """

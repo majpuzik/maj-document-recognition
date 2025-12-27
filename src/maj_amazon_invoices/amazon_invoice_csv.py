@@ -74,12 +74,12 @@ COLUMN_MAPPING = {
         "cz": "Mezisoučet"
     },
     "shipping_costs": {
-        "de": ["Versandkosten (inkl. USt.)", "Versandkosten (exkl. USt.)", "Versandkosten"],
+        "de": ["Versandkosten (inkl. USt.)", "Versandkosten"],
         "en": ["Shipping Costs", "Shipping", "Delivery Costs"],
         "cz": ["Náklady na dopravu", "Doprava"]
     },
     "promotion": {
-        "de": ["Aktionen (inkl. USt.)", "Aktionen (exkl. USt.)", "Werbeaktion", "Rabatt"],
+        "de": ["Aktionen (inkl. USt.)", "Werbeaktion", "Rabatt"],
         "en": ["Promotion", "Discount", "Promo"],
         "cz": ["Sleva", "Akce"]
     },
@@ -259,7 +259,7 @@ COLUMN_MAPPING = {
         "cz": "Uvedená cena za kus"
     },
     "purchase_ppu": {
-        "de": ["Kaufpreis pro Einheit (inkl. USt.)", "Kaufpreis pro Einheit (exkl. USt.)", "Kauf-PPU", "Einzelpreis"],
+        "de": ["Kaufpreis pro Einheit (inkl. USt.)", "Kauf-PPU", "Einzelpreis"],
         "en": ["Purchase PPU", "Unit Price", "Price Per Unit"],
         "cz": ["Nákupní cena za kus", "Jednotková cena"]
     },
@@ -346,6 +346,93 @@ COLUMN_MAPPING = {
         "de": "Ort",
         "en": "Location",
         "cz": "Místo"
+    },
+
+    # Address fields
+    "address_line_1": {
+        "de": "Adresszeile 1",
+        "en": "Address Line 1",
+        "cz": "Adresní řádek 1"
+    },
+    "address_line_2": {
+        "de": "Adresszeile 2",
+        "en": "Address Line 2",
+        "cz": "Adresní řádek 2"
+    },
+    "state": {
+        "de": "Bundesland",
+        "en": "State",
+        "cz": "Kraj"
+    },
+    "postal_code": {
+        "de": "Postleitzahl",
+        "en": "Postal Code",
+        "cz": "PSČ"
+    },
+
+    # Shipping/Tracking fields
+    "tracking_number": {
+        "de": "Sendungsnummer",
+        "en": "Tracking Number",
+        "cz": "Číslo zásilky"
+    },
+    "delivery_method": {
+        "de": "Liefermethode",
+        "en": "Delivery Method",
+        "cz": "Způsob doručení"
+    },
+
+    # Invoice number
+    "invoice_number": {
+        "de": "Rechnungsnummer",
+        "en": "Invoice Number",
+        "cz": "Číslo faktury"
+    },
+
+    # Order comments
+    "order_comments": {
+        "de": "Bestellkommentare",
+        "en": "Order Comments",
+        "cz": "Poznámky k objednávce"
+    },
+
+    # VAT rate and amount
+    "vat_rate": {
+        "de": "Umsatzsteuersatz",
+        "en": "VAT Rate",
+        "cz": "Sazba DPH"
+    },
+    "vat_amount": {
+        "de": "USt.-Summe",
+        "en": "VAT Amount",
+        "cz": "Částka DPH"
+    },
+
+    # Additional price breakdowns
+    "unit_price_excl_vat": {
+        "de": "Kaufpreis pro Einheit (exkl. USt.)",
+        "en": "Unit Price (excl. VAT)",
+        "cz": "Jednotková cena bez DPH"
+    },
+    "shipping_excl_vat": {
+        "de": "Versandkosten (exkl. USt.)",
+        "en": "Shipping (excl. VAT)",
+        "cz": "Doprava bez DPH"
+    },
+    "shipping_vat": {
+        "de": "Versandkosten USt.",
+        "en": "Shipping VAT",
+        "cz": "DPH dopravy"
+    },
+    "promotion_excl_vat": {
+        "de": "Aktionen (exkl. USt.)",
+        "en": "Promotion (excl. VAT)",
+        "cz": "Sleva bez DPH"
+    },
+    "promotion_vat": {
+        "de": "Aktionen USt.",
+        "en": "Promotion VAT",
+        "cz": "DPH slevy"
     },
 
     # Delivery fields
@@ -437,6 +524,29 @@ class AmazonOrder:
     # Delivery
     recipient_name: Optional[str] = None
     recipient_email: Optional[str] = None
+    delivery_method: Optional[str] = None
+    tracking_number: Optional[str] = None
+
+    # Address
+    address_line_1: Optional[str] = None
+    address_line_2: Optional[str] = None
+    location: Optional[str] = None
+    state: Optional[str] = None
+    postal_code: Optional[str] = None
+
+    # Invoice number (separate from order number)
+    invoice_number: Optional[str] = None
+
+    # Comments
+    order_comments: Optional[str] = None
+
+    # VAT breakdown
+    vat_rate: Optional[float] = None
+    shipping_excl_vat: Optional[float] = None
+    shipping_vat: Optional[float] = None
+    promotion_excl_vat: Optional[float] = None
+    promotion_vat: Optional[float] = None
+    unit_price_excl_vat: Optional[float] = None
 
     # Items
     items: List[AmazonOrderItem] = field(default_factory=list)
@@ -766,6 +876,29 @@ class AmazonInvoiceCSVParser:
 
             recipient_name=self.get_value(row, 'recipient_name'),
             recipient_email=self.get_value(row, 'recipient_email'),
+            delivery_method=self.get_value(row, 'delivery_method'),
+            tracking_number=self.get_value(row, 'tracking_number'),
+
+            # Address
+            address_line_1=self.get_value(row, 'address_line_1'),
+            address_line_2=self.get_value(row, 'address_line_2'),
+            location=self.get_value(row, 'location'),
+            state=self.get_value(row, 'state'),
+            postal_code=self.get_value(row, 'postal_code'),
+
+            # Invoice number
+            invoice_number=self.get_value(row, 'invoice_number'),
+
+            # Comments
+            order_comments=self.get_value(row, 'order_comments'),
+
+            # VAT breakdown
+            vat_rate=self.parse_vat_rate(self.get_value(row, 'vat_rate')),
+            shipping_excl_vat=self.parse_float(self.get_value(row, 'shipping_excl_vat')),
+            shipping_vat=self.parse_float(self.get_value(row, 'shipping_vat')),
+            promotion_excl_vat=self.parse_float(self.get_value(row, 'promotion_excl_vat')),
+            promotion_vat=self.parse_float(self.get_value(row, 'promotion_vat')),
+            unit_price_excl_vat=self.parse_float(self.get_value(row, 'unit_price_excl_vat')),
 
             language=self.language,
         )

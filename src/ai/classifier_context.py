@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+** The project "maj-document-recognition-v2/src" is a document matching system that automates the pr
+"""
+
+"""
 Context-Aware AI Classifier
 Learns from previous classifications and improves over time
 """

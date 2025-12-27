@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+** The project "maj-document-recognition-v2/src" is a document matching system that automates the pr
+"""
+
+"""
 Bank Statement Processor for MAJ Document Recognition
 Supports: MT940, CAMT.053 (XML), CSV, ABO/GPC formats
 Countries: CZ, AT, DE

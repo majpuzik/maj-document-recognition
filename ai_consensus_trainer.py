@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+MAJ Document Recognition System is a comprehensive OCR system for document classification with AI in
+"""
+
+"""
 AI Consensus Trainer - Učení se z AI konsensu
 ================================================
 1. Můj extraktor vytáhne data z dokumentu

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+** The project "maj-document-recognition-v2/src" is a document matching system that automates the pr
+"""
+
+"""
 PDF OCR Layer Handler v2.0
 Optimální fallback řetězec pro extrakci textu z dokumentů
 
