@@ -268,6 +268,48 @@ class SchemaValidator:
 
 
 # Paperless-NGX Custom Field Mapping
+# NOTE: IDs are instance-specific! Use get_field_id() for runtime lookup.
+# DGX (spark-47f9): predmet_nazev=31, predmet_typ=30, is_isdoc=150-152
+# Dell-WS: invoice_subject=23-27
+
+# Field name aliases for cross-instance compatibility
+FIELD_NAME_ALIASES = {
+    'invoice_subject': ['invoice_subject', 'predmet_nazev', 'predmet_faktury'],
+    'item_type': ['item_type', 'predmet_typ', 'typ_polozky'],
+    'is_isdoc': ['is_isdoc', 'je_isdoc'],
+    'isdoc_version': ['isdoc_version', 'isdoc_verze'],
+    'isdoc_uuid': ['isdoc_uuid'],
+}
+
+# Pre-configured instance mappings
+INSTANCE_FIELD_MAPPINGS = {
+    'dgx': {
+        'invoice_subject': 31, 'item_type': 30,
+        'is_isdoc': 150, 'isdoc_version': 151, 'isdoc_uuid': 152,
+    },
+    'dell-ws': {
+        'invoice_subject': 23, 'item_type': 24,
+        'is_isdoc': 25, 'isdoc_version': 26, 'isdoc_uuid': 27,
+    }
+}
+
+
+def get_field_id(field_key: str, paperless_fields: Dict[str, int] = None) -> Optional[int]:
+    """Get Paperless field ID with alias support."""
+    if paperless_fields is None:
+        return PAPERLESS_CUSTOM_FIELDS.get(field_key, {}).get('id')
+    aliases = FIELD_NAME_ALIASES.get(field_key, [field_key])
+    for alias in aliases:
+        if alias in paperless_fields:
+            return paperless_fields[alias]
+    return PAPERLESS_CUSTOM_FIELDS.get(field_key, {}).get('id')
+
+
+def get_instance_mappings(instance: str) -> Dict[str, int]:
+    """Get pre-configured field mappings for known Paperless instances."""
+    return INSTANCE_FIELD_MAPPINGS.get(instance, {})
+
+
 PAPERLESS_CUSTOM_FIELDS = {
     # Basic financial fields
     'amount_total': {
@@ -435,125 +477,84 @@ PAPERLESS_CUSTOM_FIELDS = {
 }
 
 
-def format_for_paperless(extracted_data: Dict[str, Any], doc_type: str) -> Dict[str, Any]:
+def format_for_paperless(extracted_data: Dict[str, Any], doc_type: str,
+                         instance: str = None) -> Dict[str, Any]:
     """
     Format extracted data for Paperless-NGX custom fields
 
     Args:
         extracted_data: Output from data extractors
         doc_type: 'invoice', 'bank_statement', or 'receipt'
+        instance: Optional instance name ('dgx', 'dell-ws') for correct field IDs
 
     Returns:
         Paperless-NGX custom fields array
     """
     custom_fields = []
+    field_map = get_instance_mappings(instance) if instance else {}
+
+    def _id(key: str) -> int:
+        return get_field_id(key, field_map)
 
     if doc_type == 'invoice':
         # Basic financial fields
         if 'summary' in extracted_data:
             summary = extracted_data['summary']
             custom_fields.extend([
-                {'field': PAPERLESS_CUSTOM_FIELDS['amount_total']['id'],
-                 'value': str(summary.get('total_gross', 0))},
-                {'field': PAPERLESS_CUSTOM_FIELDS['amount_vat']['id'],
-                 'value': str(summary.get('total_vat', 0))},
-                {'field': PAPERLESS_CUSTOM_FIELDS['amount_net']['id'],
-                 'value': str(summary.get('total_net', 0))},
-                {'field': PAPERLESS_CUSTOM_FIELDS['currency']['id'],
-                 'value': summary.get('currency', 'CZK')}
+                {'field': _id('amount_total'), 'value': str(summary.get('total_gross', 0))},
+                {'field': _id('amount_vat'), 'value': str(summary.get('total_vat', 0))},
+                {'field': _id('amount_net'), 'value': str(summary.get('total_net', 0))},
+                {'field': _id('currency'), 'value': summary.get('currency', 'CZK')}
             ])
 
-        # NEW v1.1: Invoice subject (předmět faktury)
-        if 'subject' in extracted_data:
-            custom_fields.append({
-                'field': PAPERLESS_CUSTOM_FIELDS['invoice_subject']['id'],
-                'value': extracted_data['subject']
-            })
+        # v1.1: Invoice subject (předmět faktury)
+        if 'subject' in extracted_data and _id('invoice_subject'):
+            custom_fields.append({'field': _id('invoice_subject'), 'value': extracted_data['subject']})
 
-        # NEW v1.1: Item type (služba/zboží)
-        if 'item_type' in extracted_data:
-            custom_fields.append({
-                'field': PAPERLESS_CUSTOM_FIELDS['item_type']['id'],
-                'value': extracted_data['item_type']
-            })
+        # v1.1: Item type (služba/zboží)
+        if 'item_type' in extracted_data and _id('item_type'):
+            custom_fields.append({'field': _id('item_type'), 'value': extracted_data['item_type']})
 
-        # NEW v1.1: ISDOC metadata
+        # v1.1: ISDOC metadata
         if 'isdoc' in extracted_data:
             isdoc = extracted_data['isdoc']
-            if isdoc.get('is_isdoc'):
-                custom_fields.append({
-                    'field': PAPERLESS_CUSTOM_FIELDS['is_isdoc']['id'],
-                    'value': 'true'
-                })
-            if isdoc.get('version'):
-                custom_fields.append({
-                    'field': PAPERLESS_CUSTOM_FIELDS['isdoc_version']['id'],
-                    'value': isdoc['version']
-                })
-            if isdoc.get('uuid'):
-                custom_fields.append({
-                    'field': PAPERLESS_CUSTOM_FIELDS['isdoc_uuid']['id'],
-                    'value': isdoc['uuid']
-                })
+            if isdoc.get('is_isdoc') and _id('is_isdoc'):
+                custom_fields.append({'field': _id('is_isdoc'), 'value': 'true'})
+            if isdoc.get('version') and _id('isdoc_version'):
+                custom_fields.append({'field': _id('isdoc_version'), 'value': isdoc['version']})
+            if isdoc.get('uuid') and _id('isdoc_uuid'):
+                custom_fields.append({'field': _id('isdoc_uuid'), 'value': isdoc['uuid']})
 
         # Structured data as JSON
         if 'line_items' in extracted_data:
-            custom_fields.append({
-                'field': PAPERLESS_CUSTOM_FIELDS['line_items']['id'],
-                'value': json.dumps(extracted_data, ensure_ascii=False)
-            })
+            custom_fields.append({'field': _id('line_items'), 'value': json.dumps(extracted_data, ensure_ascii=False)})
 
     elif doc_type == 'bank_statement':
-        # Balance fields
         if 'summary' in extracted_data:
             summary = extracted_data['summary']
             custom_fields.extend([
-                {'field': PAPERLESS_CUSTOM_FIELDS['opening_balance']['id'],
-                 'value': str(summary.get('opening_balance', 0))},
-                {'field': PAPERLESS_CUSTOM_FIELDS['closing_balance']['id'],
-                 'value': str(summary.get('closing_balance', 0))},
-                {'field': PAPERLESS_CUSTOM_FIELDS['currency']['id'],
-                 'value': summary.get('currency', 'CZK')}
+                {'field': _id('opening_balance'), 'value': str(summary.get('opening_balance', 0))},
+                {'field': _id('closing_balance'), 'value': str(summary.get('closing_balance', 0))},
+                {'field': _id('currency'), 'value': summary.get('currency', 'CZK')}
             ])
-
-        # Structured data as JSON
         if 'transactions' in extracted_data:
-            custom_fields.append({
-                'field': PAPERLESS_CUSTOM_FIELDS['transactions']['id'],
-                'value': json.dumps(extracted_data, ensure_ascii=False)
-            })
+            custom_fields.append({'field': _id('transactions'), 'value': json.dumps(extracted_data, ensure_ascii=False)})
 
     elif doc_type == 'receipt':
-        # Basic fields
         if 'summary' in extracted_data:
             summary = extracted_data['summary']
             custom_fields.extend([
-                {'field': PAPERLESS_CUSTOM_FIELDS['amount_total']['id'],
-                 'value': str(summary.get('total', 0))},
-                {'field': PAPERLESS_CUSTOM_FIELDS['currency']['id'],
-                 'value': summary.get('currency', 'CZK')}
+                {'field': _id('amount_total'), 'value': str(summary.get('total', 0))},
+                {'field': _id('currency'), 'value': summary.get('currency', 'CZK')}
             ])
-
-        # EET fields
         if 'eet' in extracted_data:
             eet = extracted_data['eet']
             if eet.get('fik'):
-                custom_fields.append({
-                    'field': PAPERLESS_CUSTOM_FIELDS['eet_fik']['id'],
-                    'value': eet['fik']
-                })
+                custom_fields.append({'field': _id('eet_fik'), 'value': eet['fik']})
             if eet.get('bkp'):
-                custom_fields.append({
-                    'field': PAPERLESS_CUSTOM_FIELDS['eet_bkp']['id'],
-                    'value': eet['bkp']
-                })
-
-        # Structured data as JSON
+                custom_fields.append({'field': _id('eet_bkp'), 'value': eet['bkp']})
         if 'items' in extracted_data:
-            custom_fields.append({
-                'field': PAPERLESS_CUSTOM_FIELDS['receipt_items']['id'],
-                'value': json.dumps(extracted_data, ensure_ascii=False)
-            })
+            custom_fields.append({'field': _id('receipt_items'), 'value': json.dumps(extracted_data, ensure_ascii=False)})
 
     return custom_fields
 
